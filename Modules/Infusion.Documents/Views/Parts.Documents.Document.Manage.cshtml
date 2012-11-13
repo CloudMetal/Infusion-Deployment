@@ -1,0 +1,10 @@
+﻿@using Infusion.Documents.Extensions;
+@using Infusion.Documents.Models;
+@{
+    Style.Require("DocumentsAdmin");
+}
+@if (AuthorizedFor(Infusion.Documents.Permissions.ManageDocuments)) {
+<div class="item-properties actions">
+    <p><a href="@Url.DocumentEdit((DocumentPart)Model.ContentPart)" class="edit">@T("Document Properties")</a></p>
+</div>
+}

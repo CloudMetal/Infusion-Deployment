@@ -1,0 +1,6 @@
+﻿.navicon-document {
+background-image:url(../../Orchard.Blogs/Styles/images/menu.blog.png) !important;
+}
+.navicon-document:hover {
+background-position:0 -30px !important;
+}

@@ -1,0 +1,9 @@
+﻿@using Infusion.Documents.Extensions;
+@using Infusion.Documents.Models;
+
+@{ Layout.Title = (string)Model.Title; }
+
+@Display(Model.Header)
+@Display(Model.Actions)
+<div class="manage"><a href="@Url.DocumentContentCreate((DocumentPart)Model.ContentItem.Get(typeof(DocumentPart)))" class="add button primaryAction">@T("New Document Content")</a></div>
+@Display(Model.Content)

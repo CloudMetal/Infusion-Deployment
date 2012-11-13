@@ -1,0 +1,39 @@
+﻿<Placement>
+  <!-- available display shapes -->
+  <!--
+        Parts_Documents_Document_Manage
+        Parts_Documents_Document_Description
+        Parts_Documents_Document_BlogPostCount
+        Parts_Documents_DocumentPost_List -> when in the blog detail display the blog post list is currently hard-coded to Content:5 to enable the current state of blog paging
+        Parts_Documents_DocumentPost_List_Admin
+    -->
+  
+  <Place Document_DeleteButton="Sidebar:25" />
+  <!-- widgets -->
+  <!-- default positioning -->
+  <Match ContentType="Document">
+    <Match DisplayType="Detail">
+      <!-- blog posts currently added to the blog within the controller into Content:5 <Place Parts_Documents_DocumentPost_List="Content:5" /> but...
+                 ...placing it in in the Content zone as it's currently implemented to light up the RSS feed for the blog... -->
+      <!-- Parts_Blogs_RemotePublishing is made available with the "Remote Blog Publishing" feature -->
+      <Place Parts_Documents_DocumentContent_List="Content"
+             Parts_Documents_Document_Description="Content:before" />
+    </Match>
+    <Match DisplayType="DetailAdmin">
+      <Place Parts_Documents_DocumentPost_List_Admin="Content:5"
+             Parts_Documents_Document_Manage="Actions"
+             Parts_Documents_Document_Description="Actions:after"/>
+    </Match>
+    <Match DisplayType="Summary">
+      <Place Parts_Documents_Document_Description="Content:before"
+             Parts_Documents_Document_ContentCount="Meta:3"/>
+    </Match>
+    <Match DisplayType="SummaryAdmin">
+      <Place Parts_Documents_Document_SummaryAdmin="Actions:10"/>
+      <Place Parts_Documents_Document_Description="Content:before"/>
+    </Match>
+  </Match>
+  <Match ContentType="BlogPost">
+    <Place Parts_Contents_Publish_SummaryAdmin="-"/>
+  </Match>
+</Placement>

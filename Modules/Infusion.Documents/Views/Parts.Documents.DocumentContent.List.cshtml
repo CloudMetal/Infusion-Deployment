@@ -1,0 +1,10 @@
+﻿@{
+    IEnumerable<object> documentContents = Model.ContentItems;
+    Model.ContentItems.Classes.Add("content-items");
+    Model.ContentItems.Classes.Add("document-content");
+}
+@Display(Model.ContentItems)
+@if (documentContents == null || documentContents.Count() < 1)
+{
+<p>@T("There is no document content for this document.")</p>
+}

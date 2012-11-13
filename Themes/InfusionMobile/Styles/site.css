@@ -1,0 +1,37 @@
+/* 
+Theme: Infusion 
+Author: CloudMetal (http://www.cloudmetal.com) 
+Copyright: 2012 
+*/
+#credits a:hover {
+    filter: Alpha(Opacity=30);
+	opacity: .3;
+}
+
+.footer-rating {
+    width: 50%;
+    line-height: 90px;
+    float: left;
+}
+
+#credits img {
+    height: 10px;
+    margin-right: 20px;
+    vertical-align: middle;
+}
+
+.poweredby img {
+    height: 10px;
+}
+
+.footer-powered {
+    float: right;
+    text-align: right;
+    vertical-align: middle;
+}
+
+.footer-powered img {
+    height: 10px;
+    margin-right: 20px;
+    vertical-align: middle;
+}

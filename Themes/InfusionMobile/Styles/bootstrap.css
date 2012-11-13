@@ -1,0 +1,229 @@
+/*!
+ * Bootstrap v2.0.2
+ *
+ * Copyright 2012 Twitter, Inc
+ * Licensed under the Apache License v2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Designed and built with all the love in the world @twitter by @mdo and @fat.
+ */
+.dropdown {
+position:relative;
+    width: 60px;
+}
+.dropdown-toggle {
+*margin-bottom: -3px;
+padding:15px;
+}
+.dropdown-toggle:active,
+.open .dropdown-toggle {
+  outline: 0;
+}
+.caret {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  vertical-align: top;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-top: 7px solid #595a5c;
+  content: "";
+  opacity: 1;
+  filter: alpha(opacity=100);
+}
+.dropdown .caret {
+  margin-top: 6px;
+  margin-left: 6px;
+}
+.dropdown:hover .caret,
+.open.dropdown .caret {
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+
+}
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  top:29px;
+  left: -121px;
+  z-index: 1000;
+  float: left;
+  display: none;
+  min-width: 160px;
+  padding: 1px 0;
+  margin: 0;
+  list-style: none;
+  background-color: #ffffff;
+  border-color: #ccc;
+  border-color: rgba(0, 0, 0, 0.2);
+  border-style: solid;
+  border-width: 1px;
+  -webkit-border-radius: 0 0 5px 5px;
+  -moz-border-radius: 0 0 5px 5px;
+  border-radius: 0 0 5px 5px;
+  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  -webkit-background-clip: padding-box;
+  -moz-background-clip: padding;
+  background-clip: padding-box;
+  *border-right-width: 2px;
+  *border-bottom-width: 2px;
+  border: 1px solid #BBB /*{c-bhover-border}*/;
+background: #DFDFDF /*{c-bhover-background-color}*/;
+font-weight: bold;
+color: #222 /*{c-bhover-color}*/;
+text-shadow: 0 /*{c-bhover-shadow-x}*/ 1px /*{c-bhover-shadow-y}*/ 0 /*{c-bhover-shadow-radius}*/ white /*{c-bhover-shadow-color}*/;
+background-image: -webkit-gradient(linear, left top, left bottom, from( #F6F6F6 /*{c-bhover-background-start}*/), to( #E0E0E0 /*{c-bhover-background-end}*/));
+background-image: -webkit-linear-gradient( #F6F6F6 /*{c-bhover-background-start}*/, #E0E0E0 /*{c-bhover-background-end}*/);
+background-image: -moz-linear-gradient( #F6F6F6 /*{c-bhover-background-start}*/, #E0E0E0 /*{c-bhover-background-end}*/);
+background-image: -ms-linear-gradient( #F6F6F6 /*{c-bhover-background-start}*/, #E0E0E0 /*{c-bhover-background-end}*/);
+background-image: -o-linear-gradient( #F6F6F6 /*{c-bhover-background-start}*/, #E0E0E0 /*{c-bhover-background-end}*/);
+background-image: linear-gradient( #F6F6F6 /*{c-bhover-background-start}*/, #E0E0E0 /*{c-bhover-background-end}*/);
+}
+}
+.dropdown-menu.pull-right {
+  right: 0;
+  left: auto;
+}
+.dropdown-menu .divider {
+  height: 1px;
+  margin: 8px 1px;
+  overflow: hidden;
+  background-color: #28bdb3;
+  border-bottom: 1px solid #ffffff;
+  *width: 100%;
+  *margin: -5px 0 5px;
+}
+.dropdown-menu a {
+  display: block;
+  padding: 3px 15px;
+  clear: both;
+  font-weight: normal;
+  line-height: 18px;
+  color: #595a5c;
+  white-space: nowrap;
+}
+.dropdown-menu li > a:hover,
+.dropdown-menu .active > a,
+.dropdown-menu .active > a:hover {
+  color: #ffffff;
+  text-decoration: none;
+background: #595a5c /*{c-bhover-background-color}*/;
+font-weight: bold;
+color: #222 /*{c-bhover-color}*/;
+border: 1px solid #CCC /*{c-bup-border}*/;
+text-shadow: 0 /*{c-bhover-shadow-x}*/ 1px /*{c-bhover-shadow-y}*/ 0 /*{c-bhover-shadow-radius}*/ white /*{c-bhover-shadow-color}*/;
+background-image: -webkit-gradient(linear, left top, left bottom, from( #595a5c /*{c-bhover-background-start}*/), to( #676767 /*{c-bhover-background-end}*/));
+background-image: -webkit-linear-gradient( #595a5c /*{c-bhover-background-start}*/, #676767 /*{c-bhover-background-end}*/);
+background-image: -moz-linear-gradient( #595a5c /*{c-bhover-background-start}*/, #676767 /*{c-bhover-background-end}*/);
+background-image: -ms-linear-gradient( #595a5c /*{c-bhover-background-start}*/, #676767 /*{c-bhover-background-end}*/);
+background-image: -o-linear-gradient( #595a5c /*{c-bhover-background-start}*/, #676767 /*{c-bhover-background-end}*/);
+background-image: linear-gradient( #595a5c /*{c-bhover-background-start}*/, #676767 /*{c-bhover-background-end}*/);
+}
+.dropdown.open {
+  *z-index: 1000;
+}
+.dropdown.open .dropdown-toggle {
+  color: #28bdb3;
+  background: #fff;
+  background: rgba(0, 0, 0, 0.3);
+}
+.dropdown.open .dropdown-menu {
+  display: block;
+}
+.pull-right .dropdown-menu {
+  left: auto;
+  right: 0;
+}
+.navbar-search {margin-bottom:10px;}
+.dropup .caret,
+.navbar-fixed-bottom .dropdown .caret {
+  border-top: 0;
+  border-bottom: 4px solid #000000;
+  content: "\2191";
+}
+.dropup .dropdown-menu,
+.navbar-fixed-bottom .dropdown .dropdown-menu {
+  top: auto;
+  bottom: 100%;
+  margin-bottom: 1px;
+}
+.navbar .divider-vertical {
+  height: 40px;
+  width: 1px;
+  margin: 0 9px;
+  overflow: hidden;
+}
+.navbar .dropdown-menu {
+  margin-top: 1px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+}
+.navbar .dropdown-menu:before {
+  content: '';
+  display: inline-block;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-bottom: 7px solid #ccc;
+  border-bottom-color: rgba(0, 0, 0, 0.2);
+  position: absolute;
+  top: -7px;
+  left: 9px;
+}
+.navbar .dropdown-menu:after {
+  content: '';
+  display: inline-block;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 6px solid #ffffff;
+  position: absolute;
+  top: -6px;
+  left: 10px;
+}
+.navbar-fixed-bottom .dropdown-menu:before {
+  border-top: 7px solid #ccc;
+  border-top-color: rgba(0, 0, 0, 0.2);
+  border-bottom: 0;
+  bottom: -7px;
+  top: auto;
+}
+.navbar-fixed-bottom .dropdown-menu:after {
+  border-top: 6px solid #ffffff;
+  border-bottom: 0;
+  bottom: -6px;
+  top: auto;
+}
+.navbar .nav .dropdown-toggle .caret,
+.navbar .nav .open.dropdown .caret {
+  border-top-color: #595a5c;
+  border-bottom-color: #595a5c;
+}
+.navbar .nav .active .caret {
+  opacity: 1;
+  filter: alpha(opacity=100);
+}
+.navbar .nav .open > .dropdown-toggle,
+.navbar .nav .active > .dropdown-toggle,
+.navbar .nav .open.active > .dropdown-toggle {
+  background-color: transparent;
+}
+.navbar .nav .active > .dropdown-toggle:hover {
+  color: #ffffff;
+}
+.navbar .nav.pull-right .dropdown-menu,
+.navbar .nav .dropdown-menu.pull-right {
+  left: auto;
+  right: 0;
+}
+.navbar .nav.pull-right .dropdown-menu:before,
+.navbar .nav .dropdown-menu.pull-right:before {
+  left: auto;
+  right: 12px;
+}
+.navbar .nav.pull-right .dropdown-menu:after,
+.navbar .nav .dropdown-menu.pull-right:after {
+  left: auto;
+  right: 13px;
+}

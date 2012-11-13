@@ -1,0 +1,12 @@
+﻿Name: Infusion.Documents
+AntiForgery: enabled
+Author: CloudMetal, LLC
+Website: http://www.itsonmessage.com
+Version: 0.1
+OrchardVersion: 1.5
+Category: Infusion
+Dependencies: Orchard.jQuery, Orchard.Knockout, Orchard.ContentPermissions, Shapes, Common, Feeds, Navigation, Orchard.Widgets, Orchard.PublishLater
+Description: Infusion Document Management
+Features:
+    Infusion.Documents:
+        Description: Infusion Document Management Module.
