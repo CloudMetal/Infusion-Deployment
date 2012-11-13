@@ -145,7 +145,7 @@ namespace Infusion.Documents.Controllers
         [HttpPost]
         public ActionResult Remove(int documentId)
         {
-            if (!Services.Authorizer.Authorize(Permissions.ManageDocuments, T("Couldn't delete blog")))
+            if (!Services.Authorizer.Authorize(Permissions.ManageDocuments, T("Couldn't delete document")))
                 return new HttpUnauthorizedResult();
 
             var blog = _documentService.Get(documentId, VersionOptions.Latest);
@@ -155,7 +155,7 @@ namespace Infusion.Documents.Controllers
 
             _documentService.Delete(blog);
 
-            Services.Notifier.Information(T("Blog was successfully deleted"));
+            Services.Notifier.Information(T("Document was successfully deleted"));
             return Redirect(Url.DocumentsForAdmin());
         }
 

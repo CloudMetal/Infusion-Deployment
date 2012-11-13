@@ -2,7 +2,7 @@
 AntiForgery: enabled
 Author: CloudMetal, LLC
 Website: http://www.itsonmessage.com
-Version: 0.1
+Version: 0.2
 OrchardVersion: 1.5
 Category: Infusion
 Dependencies: Orchard.jQuery, Orchard.Knockout, Orchard.ContentPermissions, Shapes, Common, Feeds, Navigation, Orchard.Widgets, Orchard.PublishLater

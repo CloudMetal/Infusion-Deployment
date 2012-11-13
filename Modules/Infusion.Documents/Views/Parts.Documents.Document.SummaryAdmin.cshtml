@@ -1,0 +1,10 @@
+﻿@using Infusion.Documents.Extensions;
+@using Infusion.Documents.Models;
+@using Orchard.ContentManagement;
+@using Orchard.Utility.Extensions;
+@{
+    ContentItem contentItem = Model.ContentItem;
+    DocumentPart blog = (DocumentPart)contentItem.Get(typeof(DocumentPart));
+}
+<a href="@Url.DocumentForAdmin(blog)" title="@T("List Content")">@T("List Content")</a>@T(" | ")
+<a href="@Url.DocumentContentCreate(blog)" title="@T("New Content")">@T("New Content")</a>@T(" | ")

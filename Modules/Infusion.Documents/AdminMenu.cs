@@ -43,7 +43,7 @@ namespace Infusion.Documents
                     item => item.Action("Item", "DocumentAdmin", new { area = "Infusion.Documents", documentId = singleBlog.Id }).Permission(Permissions.MetaListDocuments));
 
             if (singleBlog != null)
-                menu.Add(T("New Document"), "1.1",
+                menu.Add(T("New Content"), "1.1",
                          item =>
                          item.Action("Create", "DocumentContentAdmin", new { area = "Infusion.Documents", documentId = singleBlog.Id }).Permission(Permissions.MetaListDocuments));
 
