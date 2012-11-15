@@ -12,9 +12,9 @@ namespace Infusion.Documents.Models
 {
     public class DocumentContentPart : ContentPart<DocumentContentPartRecord>
     {
-        public int SourceDocumentId {
-            get { return Record.SourceDocumentId; }
-            set { Record.SourceDocumentId = value; }
+        public int OrderIndex {
+            get { return Record.OrderIndex; }
+            set { Record.OrderIndex = value; }
         }
 
         public string Title

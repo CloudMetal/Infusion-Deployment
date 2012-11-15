@@ -12,14 +12,23 @@
     ***************************************************************/
 
     SetMeta("X-UA-Compatible", "IE=edge,chrome=1");
+Script.Require("jQuery");
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+    Script.Include("jquery.uniform.js"); 
+    <script type="text/javascript" charset="utf-8">
+        $(function () {
+            $("input, textarea, select, button").uniform();
+        });
+    </script>
+        
 
-    Script.Require("jQuery");
+    Style.Include("uniform/uniform.default.css");
+    Style.Include("infusion-module.css");    
     Style.Include("bootstrap.css");
 
     /* Store each page in a variable for conditionals
     ***************************************************************/
 
-    var isProfilePage = HttpContext.Current.Request.Url.AbsolutePath.StartsWith("/");
     var currentUrl = Request.Url.AbsoluteUri;
     var isOrigin = HttpContext.Current.Request.Url.AbsolutePath.EndsWith("/");
     
@@ -151,7 +160,7 @@
     }
     @if (Model.Content != null && !isOrigin)
     {
-        <div id="content" class="span9">
+        <div id="content" class="span12">
             @Zone(Model.Content)
              
                 
@@ -207,6 +216,7 @@
             </div>
         }
     </footer>
+    <div class="clear"></div>
         </div><!--/.container -->
 
 @tag.EndElement

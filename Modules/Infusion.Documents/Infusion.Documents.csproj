@@ -87,6 +87,14 @@
       <Project>{9916839C-39FC-4CEB-A5AF-89CA7E87119F}</Project>
       <Name>Orchard.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Contrib.Taxonomies\Contrib.Taxonomies.csproj">
+      <Project>{e649ea64-d213-461b-87f7-d67035801443}</Project>
+      <Name>Contrib.Taxonomies</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Orchard.Search\Orchard.Search.csproj">
+      <Project>{4be4eb01-ac56-4048-924e-2ca77f509aba}</Project>
+      <Name>Orchard.Search</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdminMenu.cs" />
@@ -115,13 +123,11 @@
     <Compile Include="Migrations.cs" />
     <Compile Include="Services\IDocumentContentService.cs" />
     <Compile Include="Services\IDocumentService.cs" />
+    <Compile Include="ViewModels\SearchViewModel.cs" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="ViewModels\" />
-    <Folder Include="Views\DocumentContent\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\EditorTemplates\Parts\Document.cshtml" />
+    <Content Include="Views\EditorTemplates\Parts.Documents.Document.Fields.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\EditorTemplates\Parts\DocumentContent.cshtml" />
@@ -179,6 +185,23 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Parts.Documents.Document.SummaryAdmin.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Content-DocumentContent.Content.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Parts.DocumentContent.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Document\Find.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\DocumentContent\CreatableTypeList.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\DocumentContent\Create.cshtml" />
+    <Content Include="Views\DocumentContent\Edit.cshtml" />
+    <Content Include="Views\DocumentContent\List.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

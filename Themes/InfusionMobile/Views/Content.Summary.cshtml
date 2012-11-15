@@ -1,0 +1,12 @@
+﻿@using Orchard.Utility.Extensions;
+@{
+    var contentTypeClassName = ((string)Model.ContentItem.ContentType).HtmlClassify();
+}
+        @Display(Model.Header)
+        @if (Model.Meta != null) {
+			@Display(Model.Meta)
+        }
+    @Display(Model.Content)
+    @if(Model.Footer != null) {
+        @Display(Model.Footer)
+    }

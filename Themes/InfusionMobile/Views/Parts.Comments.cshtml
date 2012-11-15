@@ -2,6 +2,7 @@
 @using Orchard.Comments;
 @using Orchard.Security;
 @using Orchard.Utility.Extensions;
+
 @{
     var contextExists = TempData["CreateCommentContext.Name"] != null;
     var name = Convert.ToString(TempData["CreateCommentContext.Name"]);
@@ -9,78 +10,61 @@
     var email = Convert.ToString(TempData["CreateCommentContext.Email"]);
     var siteName = Convert.ToString(TempData["CreateCommentContext.SiteName"]);
 }
-@if (Model.ContentPart.Comments.Count > 0)
-{
-    <div id="comments">
-        <h2 class="comment-count">@T.Plural("1 Comment", "{0} Comments", (int)Model.ContentPart.Comments.Count)</h2>
-        @{Html.RenderPartial("ListOfComments", (IEnumerable<Orchard.Comments.Models.CommentPart>)Model.ContentPart.Comments);}
-    </div>
+
+<div data-role="collapsible-set" id="comments">
+@if (Model.ContentPart.Comments.Count > 0) {
+<div data-role="collapsible">
+	<h2 data-icon="comments" data-iconpos="right">@T.Plural("1 Comment", "{0} Comments", (int)Model.ContentPart.Comments.Count)<h2>
+    @{Html.RenderPartial("ListOfComments", (IEnumerable<Orchard.Comments.Models.CommentPart>)Model.ContentPart.Comments);}
+</div>
 }
-@if (Model.ContentPart.CommentsActive == false)
-{
-    if (Model.ContentPart.Comments.Count > 0)
-    {
-    <div id="comments">
-        <p class="comment-disabled">@T("Comments have been disabled for this content.")</p>
-    </div>
+
+<div data-role="collapsible">
+@if (Model.ContentPart.CommentsActive == false) {
+    if (Model.ContentPart.Comments.Count > 0) {
+        <h2>@T("Add a Comment")</h2>
+		<p class="comment-disabled">@T("Comments have been disabled for this content.")</p>
     }
 }
-else if (WorkContext.CurrentUser == null && !AuthorizedFor(Permissions.AddComment))
-{
-    <h2 id="add-comment">@T("Add a Comment")</h2>
-    <p class="info message">@T("You must {0} to comment.", Html.ActionLink(T("log on").ToString(), "LogOn", new { Controller = "Account", Area = "Orchard.Users", ReturnUrl = string.Format("{0}#addacomment", Context.Request.RawUrl) }))</p>
-}
-else
-{
-    using (Html.BeginForm("Create", "Comment", new { area = "Orchard.Comments" }, FormMethod.Post, new { @class = "comment-form" }))
-    { 
+else if (WorkContext.CurrentUser == null && !AuthorizedFor(Permissions.AddComment)) {
+<h2 id="add-comment">@T("Add a Comment")</h2>
+<p class="info message">@T("You must {0} to comment.", Html.ActionLink(T("log on").ToString(), "LogOn", new { Controller = "Account", Area = "Orchard.Users", ReturnUrl = string.Format("{0}#addacomment", Context.Request.RawUrl) }))</p>
+} else {
+<h2 id="add-comment">@T("Add a Comment")</h2>
+using (Html.BeginForm("Create", "Comment", new { area = "Orchard.Comments" }, FormMethod.Post, new { @class = "comment-form", data_ajax = "false" })) { 
     @Html.ValidationSummary() 
-        if (WorkContext.CurrentUser == null)
-        {
-
-    <fieldset>
-        <legend id="add-comment">@T("Add a Comment")</legend>
-        <div class="clearfix">
+    @:<ul class="listview">
+    if (WorkContext.CurrentUser == null) {
+        <li>
             <label for="Name">@T("Name")</label>
-            <div class="input">
-                <input id="Name" class="text" name="Name" type="text" value="@(contextExists ? name : String.Empty)" /></div>
-        </div>
-        <div class="clearfix">
+            <input id="Name" class="text" name="Name" type="text" value="@(contextExists ? name : String.Empty)" />
+        </li>
+        <li>
             <label for="Email">@T("Email")</label>
-            <div class="input">
-                <input id="Email" class="text" name="Email" type="text" value="@(contextExists ? email : String.Empty)"/>
-            </div>
-        </div>
-        <div class="clearfix">
+            <input id="Email" class="text" name="Email" type="text" value="@(contextExists ? email : String.Empty)"/>
+        </li>
+        <li>
             <label for="SiteName">@T("Url")</label>
-            <div class="input">
-                <input id="SiteName" class="text" name="SiteName" type="text" value="@(contextExists ? siteName : String.Empty)"/>
-            </div>
-        </div>
-    </fieldset>
-        }
-        else
-        {
-    @Html.Hidden("Name", WorkContext.CurrentUser.UserName ?? "")
-    @Html.Hidden("Email", WorkContext.CurrentUser.Email ?? "")
-        }
-
-    <h2 id="commenter">
-        @if (WorkContext.CurrentUser != null)
-        { @T("Hi, {0}!", Html.Encode(WorkContext.CurrentUser.UserName))}</h2>
-    <fieldset>
-        <div class="clearfix">
-            <label for="comment-text">@T("Comment")</label>
-            <div class="input">
-                <textarea id="comment-text" rows="10" cols="30" name="CommentText">@(contextExists ? commentText : String.Empty)</textarea>
-            </div>
-        </div>
-        <div class="form-actions">
-            <button class="btn btn-primary btn-large" type="submit">@T("Submit Comment")</button>
-            @Html.Hidden("CommentedOn", (int)Model.ContentPart.ContentItem.Id)
-            @Html.Hidden("ReturnUrl", Context.Request.ToUrlString())
-            @Html.AntiForgeryTokenOrchard()
-        </div>
-    </fieldset>
+            <input id="SiteName" class="text" name="SiteName" type="text" value="@(contextExists ? siteName : String.Empty)"/>
+        </li>
+    } else {
+        @Html.Hidden("Name", WorkContext.CurrentUser.UserName ?? "")
+        @Html.Hidden("Email", WorkContext.CurrentUser.Email ?? "")
     }
-}
+
+    <li><h3 id="commenter">@if (WorkContext.CurrentUser != null) { @T("Hi, {0}!", Convert.ToString(Html.ItemDisplayText(WorkContext.CurrentUser)))}</h3></li>
+        <li>
+            <label for="comment-text">@T("Comment")</label>
+            <textarea id="comment-text" rows="5" cols="30" name="CommentText">@(contextExists ? commentText : String.Empty)</textarea>
+        </li>
+        <li>
+            <button class="primaryAction" type="submit">@T("Submit Comment")</button>
+            @Html.Hidden("CommentedOn", (int)Model.ContentPart.ContentItem.Id) 
+            @Html.Hidden("ReturnUrl", Context.Request.ToUrlString()) 
+            @Html.AntiForgeryTokenOrchard() 
+        </li>
+    }
+    @:</ul>
+} 
+</div>
+</div>

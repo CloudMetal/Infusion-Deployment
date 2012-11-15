@@ -50,14 +50,11 @@ namespace Infusion.Documents.Drivers
             dynamic shapeHelper)
         {
 
-            var shape = ContentShape("Parts_Document_Edit",
-                    () => shapeHelper.EditorTemplate(
-                        TemplateName: TemplateName,
-                        Model: part,
-                        Prefix: Prefix));
             var results = new List<DriverResult> {
-                shape
+                ContentShape("Parts_Documents_Document_Fields",
+                             () => shapeHelper.EditorTemplate(TemplateName: "Parts.Documents.Document.Fields", Model: part, Prefix: Prefix))
             };
+
 
             if (part.Id > 0)
                 results.Add(ContentShape("Document_DeleteButton",

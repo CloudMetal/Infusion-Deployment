@@ -1,27 +1,15 @@
-@using System.Web.Mvc;
-<div class="nav-collapse">
-    <ul class="nav pull-right">
-        <li class="dropdown">
-            @if (WorkContext.CurrentUser != null)
-            {
-                dynamic user = WorkContext.CurrentUser.ContentItem;
-                List<string> roles = user.UserRolesPart.Roles;
-        
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">@WorkContext.CurrentUser.UserName<b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                    <li>@Html.ActionLink(T("Change Password").ToString(), "ChangePassword", new { Controller = "Account", Area = "Orchard.Users" })</li>
-                    <li>@Html.ActionLink(T("Sign Out").ToString(), "LogOff", new { Controller = "Account", Area = "Orchard.Users", ReturnUrl = Context.Request.RawUrl })</li>
-                    @if (AuthorizedFor(Orchard.Security.StandardPermissions.AccessAdminPanel))
-                    {
-                        <li class="divider"></li>
-                        <li>@Html.ActionLink(T("Dashboard").ToString(), "Index", new { Area = "Dashboard", Controller = "Admin" })</li>
-                    }
-                </ul>
+﻿@using System.Web.Mvc;
+	
+    @if (WorkContext.CurrentUser != null) {
+	@*<div data-role="navbar" data-iconpos="bottom">
+	<ul>*@
+            @T("{0}", new HtmlString(Html.ActionLink( WorkContext.CurrentUser.UserName, "ChangePassword", new { Controller = "Account", Area = "Orchard.Users" }, new { data_role = "button", data_icon = "person", data_iconpos="notext", data_inline="true"}).ToString()))
+            @Html.ActionLink(T("Sign Out").ToString(), "LogOff", new { Controller = "Account", Area = "Orchard.Users", ReturnUrl = Context.Request.RawUrl }, new { rel = "nofollow", data_role = "button", data_icon = "signout", data_iconpos="notext", data_inline="true"})
+            if (AuthorizedFor(Orchard.Security.StandardPermissions.AccessAdminPanel)) {
+                @Html.ActionLink(T("Dashboard").ToString(), "Index", new {Area = "Dashboard", Controller = "Admin"}, new { rel = "external", data_role = "button", data_icon = "gear", data_iconpos="notext", data_inline="true", @class="ui-btn-right", target = "_blank" })
             }
-            else
-            {
-                @Html.ActionLink(T("Sign In").ToString(), "LogOn", new { Controller = "Account", Area = "Orchard.Users", ReturnUrl = (Request.QueryString["ReturnUrl"] ?? Request.RawUrl) })
-            }
-        </li>
-    </ul>
-</div>
+	@*</ul>
+	</div>*@
+    } else {
+        @Html.ActionLink(T("Sign In").ToString(), "LogOn", new { Controller = "Account", Area = "Orchard.Users", ReturnUrl = (Request.QueryString["ReturnUrl"] ?? Request.RawUrl) }, new { rel = "nofollow", data_role = "button", data_icon = "person", data_iconpos="notext", data_inline="true", @class="ui-btn-right" })
+    }

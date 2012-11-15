@@ -1,12 +1,22 @@
 /*!
- * Bootstrap v2.0.2
+ * Infusion Bootstrap v2.0.2
  *
- * Copyright 2012 Twitter, Inc
- * Licensed under the Apache License v2.0
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Designed and built with all the love in the world @twitter by @mdo and @fat.
  */
+
+.zone-content { margin-bottom: 10px;padding-bottom: 10px;}
+
+@font-face {
+    font-family: 'TradeGothicCondNo18';
+    src: url('TradeGothicCondNo18Obl.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+a {
+    font-family: TradeGothicCondNo18;
+    color: #404041;
+	font-size:18px;
+}
 article,
 aside,
 details,
@@ -93,12 +103,14 @@ input[type="submit"] {
   cursor: pointer;
   -webkit-appearance: button;
 }
-input[type="search"] {
+input[type="file"], input[type="search"] {
   -webkit-appearance: textfield;
   -webkit-box-sizing: content-box;
   -moz-box-sizing: content-box;
   box-sizing: content-box;
 }
+input[type="file"]::-webkit-search-decoration,
+input[type="file"]::-webkit-search-cancel-button, 
 input[type="search"]::-webkit-search-decoration,
 input[type="search"]::-webkit-search-cancel-button {
   -webkit-appearance: none;
@@ -138,7 +150,7 @@ textarea {
 }
 body {
   margin: 0;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: TradeGothicCondNo18;
   font-size: 13px;
   line-height: 18px;
   color: #333333;
@@ -215,7 +227,7 @@ a:hover {
   width: 60px;
 }
 .offset12 {
-  margin-left: 980px;
+  margin-left: 940px;
 }
 .offset11 {
   margin-left: 900px;
@@ -333,7 +345,7 @@ a:hover {
 }
 p {
   margin: 0 0 9px;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: TradeGothicCondNo18;
   font-size: 13px;
   line-height: 18px;
 }
@@ -538,7 +550,7 @@ cite {
 code,
 pre {
   padding: 0 3px 2px;
-  font-family: Menlo, Monaco, "Courier New", monospace;
+    font-family: TradeGothicCondNo18;
   font-size: 12px;
   color: #333333;
   -webkit-border-radius: 3px;
@@ -617,29 +629,42 @@ input,
 button,
 select,
 textarea {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: TradeGothicCondNo18;
 }
 label {
   display: block;
   margin-bottom: 5px;
   color: #333333;
 }
-input,
-textarea,
-select,
-.uneditable-input {
+input{
   display: inline-block;
   width: 210px;
-  height: 18px;
+  height: 15px;
   padding: 4px;
   margin-bottom: 9px;
   font-size: 13px;
   line-height: 18px;
   color: #555555;
   border: 1px solid #cccccc;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  border-radius: 30px;
+}
+textarea,
+select,
+.uneditable-input {
+  display: inline-block;
+  width: 210px;
+  height: 15px;
+  padding: 4px;
+  margin-bottom: 9px;
+  font-size: 13px;
+  line-height: 18px;
+  color: #555555;
+  border: 1px solid #cccccc;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
 }
 .uneditable-textarea {
   width: auto;
@@ -683,6 +708,7 @@ input[type="file"] {
   -moz-box-shadow: none;
   box-shadow: none;
 }
+input[type="file"],
 input[type="button"],
 input[type="reset"],
 input[type="submit"] {
@@ -723,7 +749,7 @@ input[type="hidden"] {
 }
 .radio,
 .checkbox {
-  padding-left: 18px;
+  padding-left: 5px;
 }
 .radio input[type="radio"],
 .checkbox input[type="checkbox"] {
@@ -740,7 +766,9 @@ input[type="hidden"] {
   padding-top: 5px;
   margin-bottom: 0;
   vertical-align: middle;
+  margin-left: -5px;
 }
+.radio.inline.whitetxtform { font-size:22px; color:#fff; }
 .radio.inline + .radio.inline,
 .checkbox.inline + .checkbox.inline {
   margin-left: 10px;
@@ -1112,6 +1140,7 @@ select:focus:required:invalid:focus {
 .form-horizontal .input-append {
   display: inline-block;
   margin-bottom: 0;
+  resize: none;
 }
 .form-search .hide,
 .form-inline .hide,
@@ -1165,12 +1194,14 @@ legend + .control-group {
 }
 .form-horizontal .control-label {
   float: left;
-  width: 140px;
+  width: 190px;
   padding-top: 5px;
   text-align: right;
+  color: #fff;
+  font-size:22px;
 }
 .form-horizontal .controls {
-  margin-left: 160px;
+  margin-left: 200px;
   /* Super jank IE7 fix to ensure the inputs in .input-append and input-prepend don't inherit the margin of the parent, in this case .controls */
 
   *display: inline-block;
@@ -1184,6 +1215,11 @@ legend + .control-group {
 .form-horizontal .form-actions {
   padding-left: 160px;
 }
+.form-title { color: #fff; font-size:30px; margin-top:20px; padding-top:20px;}
+.form-directions { color: #fff; font-size:16px; text-transform:uppercase;}
+.form-horizontal hr { margin: 10px 0 20px;border: 0;
+border-top: 1px solid #EEE;
+border-bottom: 0px solid white;}
 table {
   max-width: 100%;
   border-collapse: collapse;
@@ -1856,7 +1892,7 @@ table .span24 {
 .dropdown-menu .active > a:hover {
   color: #ffffff;
   text-decoration: none;
-  background-color: #0088cc;
+  background-color: #28bdb3;
 }
 .dropdown.open {
   *z-index: 1000;
@@ -2775,7 +2811,7 @@ input[type="submit"].btn.btn-mini {
   *position: relative;
   *z-index: 2;
   overflow: visible;
-  margin-bottom: 18px;
+  margin-bottom: 13px;
 }
 .navbar-inner {
     padding: 40px 20px 45px 20px;
@@ -2901,7 +2937,7 @@ input[type="submit"].btn.btn-mini {
 }
 .navbar-search .search-query {
   padding: 4px 9px;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: TradeGothicCondNo18;
   font-size: 20px;
   font-weight: normal;
   line-height: 1;
@@ -2982,13 +3018,13 @@ input[type="submit"].btn.btn-mini {
   float: none;
   padding: 20px 10px 21px;
   line-height: 19px;
-  color: #999999;
+  color: #ffffff;
   text-decoration: none;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
 .navbar .nav > li > a:hover {
   background-color: transparent;
-  color: #ffffff;
+  color: #999999;
   text-decoration: none;
 }
 .navbar .nav .active > a,

@@ -8,6 +8,6 @@ namespace Infusion.Documents.Models
 {
     public class DocumentContentPartRecord : ContentPartRecord
     {
-        public virtual int SourceDocumentId { get; set; }
+        public virtual int OrderIndex { get; set; }
     }
 }

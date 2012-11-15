@@ -1,7 +1,6 @@
 Name: InfusionMobile
 Author: CloudMetal
-Website: http://www.cloudmetal.com
-Description: Orchard Theme Infusion Mobile for Marketing Capabilities
-Version: 0.1.0
-Tags: OnMessage, Bootstrap, CloudMetal
-Zones: Header, Navigation, Featured, BeforeMain, AsideFirst, Messages, BeforeContent, Content, AfterContent, AsideSecond, AfterMain, TripelFirst, TripelSecond, TripelThird, Footer
+Description: Theme based on the popular jQuery mobile framework for smart phones and tablets.
+Version: 1.1.0
+Website: http://cloudmetal.com
+Zones: Header, Navigation, Messages, Content, AsideSecond, Footer

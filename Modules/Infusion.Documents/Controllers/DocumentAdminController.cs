@@ -184,7 +184,9 @@ namespace Infusion.Documents.Controllers
             if (documentPart == null)
                 return HttpNotFound();
 
-            var docContents = _documentContentService.Get(documentPart, pager.GetStartIndex(), pager.PageSize, VersionOptions.Latest).ToArray();
+            var docContents = Services.ContentManager.Query<DocumentContentPart, DocumentContentPartRecord>().Slice(pager.GetStartIndex(), pager.PageSize)
+                                               .OrderBy(c => c.OrderIndex).Where(c => c.DocumentPart.Id == documentId);
+            //var docContents = _documentContentService.Get(documentPart, pager.GetStartIndex(), pager.PageSize, VersionOptions.Latest).ToArray();
             var contentShapes = docContents.Select(bp => _contentManager.BuildDisplay(bp, "SummaryAdmin")).ToArray();
 
             dynamic document = Services.ContentManager.BuildDisplay(documentPart, "DetailAdmin");

@@ -41,7 +41,7 @@ namespace Infusion.Documents.Drivers
             dynamic shapeHelper)
         {
 
-            return ContentShape("Parts_Document_Edit",
+            return ContentShape("Parts_DocumentContent_Edit",
                     () => shapeHelper.EditorTemplate(
                         TemplateName: TemplateName,
                         Model: part,

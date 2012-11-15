@@ -1,0 +1,1 @@
+!function(a){a(".tooltip").tooltip({selector:"a[rel=tooltip]"});a(".popover").popover();a("a[rel=popover]").popover().click(function(b){b.preventDefault()})}(window.jQuery);

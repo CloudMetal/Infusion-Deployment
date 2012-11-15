@@ -1,0 +1,10 @@
+﻿@using Orchard.ContentManagement;
+@using Orchard.Core.Contents;
+@{
+// @Html.ItemEditLink(T("Edit").Text, (ContentItem)Model.ContentItem, new { ReturnUrl = Html.ViewContext.HttpContext.Request.RawUrl })
+// data-role="button" data-mini="true" data-icon="edit" data-iconpos="notext"
+}
+@Display(Model.Child)
+@if (AuthorizedFor(Permissions.EditContent) && Model.ContentItem.Id > 0) {
+<a href="@Url.ItemEditUrl((ContentItem)Model.ContentItem)" target="_blank">@T("Edit")</a>	
+}

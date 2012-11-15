@@ -2,4 +2,10 @@
     <Match ContentType="Page">
         <Place Parts_Common_Metadata="-" />
     </Match>
+  <Match ContentType="DocumentContent" DisplayType="Summary">
+    <Place Fields_Contrib_TaxonomyField="-" />
+  </Match>
+  <Match ContenType="User">
+    <Place Parts_Roles_UserRoles_Edit="-" />
+  </Match>
 </Placement>

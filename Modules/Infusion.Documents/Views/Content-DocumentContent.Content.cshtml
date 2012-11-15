@@ -1,0 +1,7 @@
+﻿@using Infusion.Documents.Models
+@using Orchard.ContentManagement
+@{
+    ContentItem contentItem = Model.ContentItem;
+    DocumentContentPart contentPart = (DocumentContentPart)contentItem.Get(typeof(DocumentContentPart));
+}
+<div>@Display(Model.Content)</div>

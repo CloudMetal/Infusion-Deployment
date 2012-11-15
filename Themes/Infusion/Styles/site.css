@@ -136,7 +136,7 @@ input:focus.input-validation-error, textarea:focus.input-validation-error { bord
     width: 100%;
 }
 
-.nav-search-btn input[type="submit"] {
+.nav-search-btn input[type="file"], .nav-search-btn input[type="submit"] {
     padding: 8px 20px 8px 20px;
     margin-left: 25px;
     margin-top: 6px;
@@ -157,4 +157,21 @@ input:focus.input-validation-error, textarea:focus.input-validation-error { bord
   -webkit-border-radius: 30px;
   -moz-border-radius: 30px;
   border-radius: 30px;
+}
+
+
+
+@font-face {
+    font-family: 'TradeGothicCondNo18';
+    src: url('TradeGothicCondNo18Obl.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+
+
+a {
+    font-family: TradeGothicCondNo18;
+    color: #404041;
+	font-size:18px;
 }

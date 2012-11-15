@@ -50,6 +50,8 @@ namespace Infusion.Documents.Controllers
             var documentContent = Services.ContentManager.New<DocumentContentPart>("DocumentContent");
             documentContent.DocumentPart = document;
 
+            documentContent.OrderIndex = _documentContentService.ContentCount(document);
+
             if (!Services.Authorizer.Authorize(Permissions.EditDocumentContent, document, T("Not allowed to create document content")))
                 return new HttpUnauthorizedResult();
 
@@ -142,11 +144,11 @@ namespace Infusion.Documents.Controllers
                 return HttpNotFound();
 
             // Get draft (create a new version if needed)
-            var blogPost = _documentContentService.Get(documentId, VersionOptions.DraftRequired);
-            if (blogPost == null)
+            var documentContent = _documentContentService.Get(contentId, VersionOptions.DraftRequired);
+            if (documentContent == null)
                 return HttpNotFound();
 
-            if (!Services.Authorizer.Authorize(Permissions.PublishDocumentContent, blogPost, T("Couldn't publish content")))
+            if (!Services.Authorizer.Authorize(Permissions.PublishDocumentContent, documentContent, T("Couldn't publish content")))
                 return new HttpUnauthorizedResult();
 
             return EditPOST(documentId, contentId, returnUrl, contentItem => Services.ContentManager.Publish(contentItem));

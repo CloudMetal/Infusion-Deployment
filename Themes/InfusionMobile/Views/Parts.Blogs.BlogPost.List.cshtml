@@ -1,26 +1,12 @@
-﻿@using Orchard.ContentManagement;
-@{
-    IEnumerable<object> blogPosts =
-        Model.ContentItems;
+﻿@{
+    IEnumerable<object> blogPosts = Model.ContentItems;
+    Model.ContentItems.Classes.Add("content-items");
+    Model.ContentItems.Classes.Add("blog-posts");
+    Model.ContentItems.Attributes.Add("data-role", "listview");
+    Model.ContentItems.Attributes.Add("data-inset", "true");
+    Model.ContentItems.Attributes.Add("data-split-icon", "edit");
 }
+@Display(Model.ContentItems)
 @if (blogPosts == null || blogPosts.Count() < 1) {
-<p>@T("No posts.")</p>
-}
-else {
-    <ul data-role="listview" class="content-items">
-    @foreach (dynamic post in blogPosts) {
-        string title = post.Title;
-        ContentItem item = post.ContentItem;
-        <li class="content-item-summary">
-            <a href="@post.ContentItem.AutoroutePart.Path">
-				<h3>@post.ContentItem.TitlePart.Title</h3>
-				<p><strong>Boston Conference Planning</strong></p>
-				@Html.Raw(post.ContentItem.BodyPart.Text)
-				<p class="ui-li-aside"><strong>9:18</strong>AM</p>
-			</a>
-        </li>
-
-        
-    }
-    </ul>
+<p>@T("There are no posts for this blog.")</p>
 }

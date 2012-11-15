@@ -1,1 +1,6 @@
 ﻿@model Infusion.Documents.Models.DocumentContentPart
+           
+<fieldset>
+    @Html.LabelFor(m => m.OrderIndex, T("Order Index"))
+    @Html.TextBoxFor(m => m.OrderIndex)
+</fieldset>
