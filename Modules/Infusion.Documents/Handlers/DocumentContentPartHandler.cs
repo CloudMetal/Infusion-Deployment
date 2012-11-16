@@ -30,10 +30,16 @@ namespace Infusion.Documents.Handlers
             OnGetEditorShape<DocumentContentPart>(SetModelProperties);
             OnUpdateEditorShape<DocumentContentPart>(SetModelProperties);
 
+            //OnCreated<BlogPostPart>((context, part) => UpdateBlogPostCount(part));
+            //OnPublished<BlogPostPart>((context, part) => UpdateBlogPostCount(part));
+            //OnUnpublished<BlogPostPart>((context, part) => UpdateBlogPostCount(part));
+            //OnVersioned<BlogPostPart>((context, part, newVersionPart) => UpdateBlogPostCount(newVersionPart));
+            //OnRemoved<BlogPostPart>((context, part) => UpdateBlogPostCount(part));
+
             OnRemoved<DocumentPart>(
                 (context, b) =>
                 documentContentService.Get(context.ContentItem.As<DocumentPart>()).ToList().ForEach(
-                    documentContent => context.ContentManager.Remove(documentContent.ContentItem)));
+                    blogPost => context.ContentManager.Remove(blogPost.ContentItem)));
         }
 
         private static void SetModelProperties(BuildShapeContext context, DocumentContentPart documentContentPart)

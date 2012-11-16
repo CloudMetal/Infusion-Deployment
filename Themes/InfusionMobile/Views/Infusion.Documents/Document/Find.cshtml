@@ -1,0 +1,151 @@
+﻿@using Orchard.ContentManagement
+@model Infusion.Documents.ViewModels.SearchViewModel
+
+@{
+    var ImgPath = Url.Content("~/Themes/InfusionMobile/Content/Images/");
+    Script.Include("content-row.js");	    
+}
+						<ul id="pages-list">
+							<li id="page-elevator" class="listed-page">
+								<a href="Javascript:void(0);">ELEVATOR PITCH</a>
+								<div>
+<ul>
+    <li>
+    @if (Model.ElevatorPitches.Any()) {
+        foreach (var documentContent in Model.ElevatorPitches.Take(1))
+        {
+            var content = (IContent)documentContent.ContentItem;
+        <span class="dash-span">-</span> <a class="article-linkage" href="@Url.Content(Url.ItemDisplayUrl(content))">@Html.ItemDisplayText(content)</a>
+        }       
+    }
+    else { @T("No presentations") }
+										
+											
+										</li> 
+</ul>
+								</div>
+							</li>
+							<li id="page-benefits" class="listed-page">
+								<a href="Javascript:void(0);">BENEFITS</a>
+								<div>
+									<ul>
+    <li>
+    @if (Model.Benefits.Any()) {
+        foreach (var documentContent in Model.Benefits.Take(1))
+        {
+            var content = (IContent)documentContent.ContentItem;
+        <span class="dash-span">-</span> <a class="article-linkage" href="@Url.Content(Url.ItemDisplayUrl(content))">@Html.ItemDisplayText(content)</a>
+        }       
+    }
+    else { @T("No presentations") }
+										
+											
+										</li> 
+									</ul>
+								</div>
+							</li>
+							<li id="page-faqs" class="listed-page">
+								<a href="Javascript:void(0);">FAQs</a>
+								<div>
+														<ul>
+    <li>
+    @if (Model.Faq.Any()) {
+        foreach (var documentContent in Model.Faq.Take(1))
+        {
+            var content = (IContent)documentContent.ContentItem;
+        <span class="dash-span">-</span> <a class="article-linkage" href="@Url.Content(Url.ItemDisplayUrl(content))">@Html.ItemDisplayText(content)</a>
+        }       
+    }
+    else { @T("No presentations") }
+										
+											
+										</li> 
+									</ul>				
+								</div>
+							</li>
+							<li id="page-pain" class="listed-page">
+								<a href="Javascript:void(0);">PAIN POINTS</a>
+								<div>
+																		<ul>
+    <li>
+    @if (Model.PainPoints.Any())
+    {
+        foreach (var documentContent in Model.PainPoints.Take(1))
+        {
+            var content = (IContent)documentContent.ContentItem;
+        <span class="dash-span">-</span> <a class="article-linkage" href="@Url.Content(Url.ItemDisplayUrl(content))">@Html.ItemDisplayText(content)</a>
+        }       
+    }
+    else { @T("No presentations") }
+										
+											
+										</li> 
+									</ul>
+								</div>
+							</li>
+							<li id="page-resources" class="listed-page">
+								<a href="Javascript:void(0);">RELEVANT RESOURCES</a>
+								<div>
+									<ul>
+										<li>
+											<h1>PRESENTATIONS</h1>
+											<p>
+       @if (Model.Presentations.Any()) {
+        foreach (var documentContent in Model.Presentations) {
+            var content = (IContent) documentContent.ContentItem;
+			<a class="article-linkage" href="@Url.Content(Url.ItemDisplayUrl(content))">@Html.ItemDisplayText(content)</a>
+        }       
+    }
+    else { @T("No presentations") }
+											</p>
+										</li>
+										<li>
+											<h1>WHITE PAPERS</h1>
+											<p>
+       @if (Model.WhitePapers.Any()) {
+        foreach (var documentContent in Model.WhitePapers) {
+            var content = (IContent) documentContent.ContentItem;
+			<a class="article-linkage" href="@Url.Content(Url.ItemDisplayUrl(content))">@Html.ItemDisplayText(content)</a>
+        }       
+    }
+    else { @T("No presentations") }
+											</p>
+										</li>
+										<li>
+											<h1>CASE STUDIES</h1>
+											<p>
+       @if (Model.CaseStudies.Any()) {
+        foreach (var documentContent in Model.CaseStudies) {
+            var content = (IContent) documentContent.ContentItem;
+			<a class="article-linkage" href="@Url.Content(Url.ItemDisplayUrl(content))">@Html.ItemDisplayText(content)</a>
+        }       
+    }
+    else { @T("No presentations") }
+											</p>
+										</li>
+									</ul>
+								</div>
+							</li>
+							<li id="page-trending"  class="listed-page">
+								<a href="Javascript:void(0);">TRENDING NOW</a>
+								<div>
+									<ul>
+       @if (Model.CaseStudies.Any()) {
+           foreach (var documentContent in Model.CaseStudies.Take(3))
+           {
+            var content = (IContent) documentContent.ContentItem;
+										<li>
+											<a href="@Url.Content(Url.ItemDisplayUrl(content))"><span class="trending-title">NEWS:</span> @Html.ItemDisplayText(content)</a>
+											<div class="trending-buttons">
+												<a href="Javascript:void(0);"><img src="@(ImgPath + "arrow-left.png")"></a>
+												<a href="Javascript:void(0);"><img src="@(ImgPath + "arrow-right.png")"></a>
+											</div>
+										</li>
+                                        }
+    }
+    else { @T("No news records relate.") }
+									</ul>
+								</div>
+							</li>
+						</ul>
+

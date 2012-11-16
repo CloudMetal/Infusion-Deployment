@@ -127,7 +127,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="Views\EditorTemplates\Parts.Documents.Document.Fields.cshtml" />
+    <Content Include="Views\EditorTemplates\Parts\Document.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\EditorTemplates\Parts\DocumentContent.cshtml" />
@@ -187,20 +187,18 @@
     <Content Include="Views\Parts.Documents.Document.SummaryAdmin.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Content-DocumentContent.Content.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Parts.DocumentContent.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Document\Find.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\DocumentContent\CreatableTypeList.cshtml">
-      <SubType>Code</SubType>
-    </Content>
+    <Content Include="Views\DocumentContent\CreatableTypeList.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Views\DocumentContent\Create.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Views\DocumentContent\Edit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Views\DocumentContent\List.cshtml" />
   </ItemGroup>
   <PropertyGroup>

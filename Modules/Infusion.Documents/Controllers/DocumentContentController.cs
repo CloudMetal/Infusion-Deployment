@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Reflection;
 using System.Web.Mvc;
 using System.Web.Routing;
-using Infusion.Documents.Services;
 using Orchard;
 using Orchard.ContentManagement;
 using Orchard.ContentManagement.Aspects;
@@ -20,17 +19,16 @@ using Orchard.Localization;
 using Orchard.Logging;
 using Orchard.Mvc.Extensions;
 using Orchard.Mvc.Html;
-using Orchard.Settings;
 using Orchard.Themes;
 using Orchard.UI.Navigation;
 using Orchard.UI.Notify;
+using Orchard.Settings;
 using Orchard.Utility.Extensions;
 
-namespace Infusion.Documents.Controllers
-{
+namespace Infusion.Documents.Controllers {
+    [ValidateInput(false)]
     [Themed]
-    public class DocumentContentController : Controller, IUpdateModel
-    {
+    public class DocumentContentController : Controller, IUpdateModel {
         private readonly IContentManager _contentManager;
         private readonly IContentDefinitionManager _contentDefinitionManager;
         private readonly ITransactionManager _transactionManager;
@@ -42,8 +40,7 @@ namespace Infusion.Documents.Controllers
             IContentDefinitionManager contentDefinitionManager,
             ITransactionManager transactionManager,
             ISiteService siteService,
-            IShapeFactory shapeFactory)
-        {
+            IShapeFactory shapeFactory) {
             Services = orchardServices;
             _contentManager = contentManager;
             _contentDefinitionManager = contentDefinitionManager;
@@ -59,14 +56,12 @@ namespace Infusion.Documents.Controllers
         public Localizer T { get; set; }
         public ILogger Logger { get; set; }
 
-        public ActionResult List(ListContentsViewModel model, PagerParameters pagerParameters)
-        {
+        public ActionResult List(ListContentsViewModel model, PagerParameters pagerParameters) {
             Pager pager = new Pager(_siteService.GetSiteSettings(), pagerParameters);
 
             var query = _contentManager.Query(VersionOptions.Latest, GetCreatableTypes(false).Select(ctd => ctd.Name).ToArray());
 
-            if (!string.IsNullOrEmpty(model.TypeName))
-            {
+            if (!string.IsNullOrEmpty(model.TypeName)) {
                 var contentTypeDefinition = _contentDefinitionManager.GetTypeDefinition(model.TypeName);
                 if (contentTypeDefinition == null)
                     return HttpNotFound();
@@ -77,8 +72,7 @@ namespace Infusion.Documents.Controllers
                 query = query.ForType(model.TypeName);
             }
 
-            switch (model.Options.OrderBy)
-            {
+            switch (model.Options.OrderBy) {
                 case ContentsOrder.Modified:
                     //query = query.OrderByDescending<ContentPartRecord, int>(ci => ci.ContentItemRecord.Versions.Single(civr => civr.Latest).Id);
                     query = query.OrderByDescending<CommonPartRecord>(cr => cr.ModifiedUtc);
@@ -113,25 +107,20 @@ namespace Infusion.Documents.Controllers
             return View((object)viewModel);
         }
 
-        private IEnumerable<ContentTypeDefinition> GetCreatableTypes(bool andContainable)
-        {
+        private IEnumerable<ContentTypeDefinition> GetCreatableTypes(bool andContainable) {
             return _contentDefinitionManager.ListTypeDefinitions().Where(ctd => ctd.Settings.GetModel<ContentTypeSettings>().Creatable && (!andContainable || ctd.Parts.Any(p => p.PartDefinition.Name == "ContainablePart")));
         }
 
         [HttpPost, ActionName("List")]
         [FormValueRequired("submit.Filter")]
-        public ActionResult ListFilterPOST(ContentOptions options)
-        {
+        public ActionResult ListFilterPOST(ContentOptions options) {
             var routeValues = ControllerContext.RouteData.Values;
-            if (options != null)
-            {
+            if (options != null) {
                 routeValues["Options.OrderBy"] = options.OrderBy; //todo: don't hard-code the key
-                if (GetCreatableTypes(false).Any(ctd => string.Equals(ctd.Name, options.SelectedFilter, StringComparison.OrdinalIgnoreCase)))
-                {
+                if (GetCreatableTypes(false).Any(ctd => string.Equals(ctd.Name, options.SelectedFilter, StringComparison.OrdinalIgnoreCase))) {
                     routeValues["id"] = options.SelectedFilter;
                 }
-                else
-                {
+                else {
                     routeValues.Remove("id");
                 }
             }
@@ -141,20 +130,15 @@ namespace Infusion.Documents.Controllers
 
         [HttpPost, ActionName("List")]
         [FormValueRequired("submit.BulkEdit")]
-        public ActionResult ListPOST(ContentOptions options, IEnumerable<int> itemIds, string returnUrl)
-        {
-            if (itemIds != null)
-            {
+        public ActionResult ListPOST(ContentOptions options, IEnumerable<int> itemIds, string returnUrl) {
+            if (itemIds != null) {
                 var checkedContentItems = _contentManager.GetMany<ContentItem>(itemIds, VersionOptions.Latest, QueryHints.Empty);
-                switch (options.BulkAction)
-                {
+                switch (options.BulkAction) {
                     case ContentsBulkAction.None:
                         break;
                     case ContentsBulkAction.PublishNow:
-                        foreach (var item in checkedContentItems)
-                        {
-                            if (!Services.Authorizer.Authorize(Orchard.Core.Contents.Permissions.PublishContent, item, T("Couldn't publish selected content.")))
-                            {
+                        foreach (var item in checkedContentItems) {
+                            if (!Services.Authorizer.Authorize(Orchard.Core.Contents.Permissions.PublishContent, item, T("Couldn't publish selected content."))) {
                                 _transactionManager.Cancel();
                                 return new HttpUnauthorizedResult();
                             }
@@ -164,10 +148,8 @@ namespace Infusion.Documents.Controllers
                         Services.Notifier.Information(T("Content successfully published."));
                         break;
                     case ContentsBulkAction.Unpublish:
-                        foreach (var item in checkedContentItems)
-                        {
-                            if (!Services.Authorizer.Authorize(Orchard.Core.Contents.Permissions.PublishContent, item, T("Couldn't unpublish selected content.")))
-                            {
+                        foreach (var item in checkedContentItems) {
+                            if (!Services.Authorizer.Authorize(Orchard.Core.Contents.Permissions.PublishContent, item, T("Couldn't unpublish selected content."))) {
                                 _transactionManager.Cancel();
                                 return new HttpUnauthorizedResult();
                             }
@@ -177,10 +159,8 @@ namespace Infusion.Documents.Controllers
                         Services.Notifier.Information(T("Content successfully unpublished."));
                         break;
                     case ContentsBulkAction.Remove:
-                        foreach (var item in checkedContentItems)
-                        {
-                            if (!Services.Authorizer.Authorize(Orchard.Core.Contents.Permissions.DeleteContent, item, T("Couldn't remove selected content.")))
-                            {
+                        foreach (var item in checkedContentItems) {
+                            if (!Services.Authorizer.Authorize(Orchard.Core.Contents.Permissions.DeleteContent, item, T("Couldn't remove selected content."))) {
                                 _transactionManager.Cancel();
                                 return new HttpUnauthorizedResult();
                             }
@@ -197,16 +177,14 @@ namespace Infusion.Documents.Controllers
             return this.RedirectLocal(returnUrl, () => RedirectToAction("List"));
         }
 
-        ActionResult CreatableTypeList(int? containerId)
-        {
+        ActionResult CreatableTypeList(int? containerId) {
             dynamic viewModel = Shape.ViewModel(ContentTypes: GetCreatableTypes(containerId.HasValue), ContainerId: containerId);
 
             // Casting to avoid invalid (under medium trust) reflection over the protected View method and force a static invocation.
             return View("CreatableTypeList", (object)viewModel);
         }
 
-        public ActionResult Create(string id, int? containerId)
-        {
+        public ActionResult Create(string id, int? containerId) {
             if (string.IsNullOrEmpty(id))
                 return CreatableTypeList(containerId);
 
@@ -215,11 +193,9 @@ namespace Infusion.Documents.Controllers
             if (!Services.Authorizer.Authorize(Orchard.Core.Contents.Permissions.EditContent, contentItem, T("Cannot create content")))
                 return new HttpUnauthorizedResult();
 
-            if (containerId.HasValue && contentItem.Is<ContainablePart>())
-            {
+            if (containerId.HasValue && contentItem.Is<ContainablePart>()) {
                 var common = contentItem.As<CommonPart>();
-                if (common != null)
-                {
+                if (common != null) {
                     common.Container = _contentManager.Get(containerId.Value);
                 }
             }
@@ -231,10 +207,8 @@ namespace Infusion.Documents.Controllers
 
         [HttpPost, ActionName("Create")]
         [FormValueRequired("submit.Save")]
-        public ActionResult CreatePOST(string id, string returnUrl)
-        {
-            return CreatePOST(id, returnUrl, contentItem =>
-            {
+        public ActionResult CreatePOST(string id, string returnUrl) {
+            return CreatePOST(id, returnUrl, contentItem => {
                 if (!contentItem.Has<IPublishingControlAspect>() && !contentItem.TypeDefinition.Settings.GetModel<ContentTypeSettings>().Draftable)
                     _contentManager.Publish(contentItem);
             });
@@ -242,8 +216,7 @@ namespace Infusion.Documents.Controllers
 
         [HttpPost, ActionName("Create")]
         [FormValueRequired("submit.Publish")]
-        public ActionResult CreateAndPublishPOST(string id, string returnUrl)
-        {
+        public ActionResult CreateAndPublishPOST(string id, string returnUrl) {
 
             // pass a dummy content to the authorization check to check for "own" variations
             var dummyContent = _contentManager.New(id);
@@ -254,8 +227,7 @@ namespace Infusion.Documents.Controllers
             return CreatePOST(id, returnUrl, contentItem => _contentManager.Publish(contentItem));
         }
 
-        private ActionResult CreatePOST(string id, string returnUrl, Action<ContentItem> conditionallyPublish)
-        {
+        private ActionResult CreatePOST(string id, string returnUrl, Action<ContentItem> conditionallyPublish) {
             var contentItem = _contentManager.New(id);
 
             if (!Services.Authorizer.Authorize(Orchard.Core.Contents.Permissions.EditContent, contentItem, T("Couldn't create content")))
@@ -264,8 +236,7 @@ namespace Infusion.Documents.Controllers
             _contentManager.Create(contentItem, VersionOptions.Draft);
 
             dynamic model = _contentManager.UpdateEditor(contentItem, this);
-            if (!ModelState.IsValid)
-            {
+            if (!ModelState.IsValid) {
                 _transactionManager.Cancel();
                 // Casting to avoid invalid (under medium trust) reflection over the protected View method and force a static invocation.
                 return View((object)model);
@@ -274,23 +245,21 @@ namespace Infusion.Documents.Controllers
             conditionallyPublish(contentItem);
 
             var documentsField = ((dynamic)Services.WorkContext.CurrentUser).ProfilePart.Resume;
-            var documents = ((int[])documentsField.Ids).ToList();
+            var documents = ((int[]) documentsField.Ids).ToList();
             documents.Add(contentItem.Id);
             documentsField.Ids = documents.ToArray();
 
             Services.Notifier.Information(string.IsNullOrWhiteSpace(contentItem.TypeDefinition.DisplayName)
                 ? T("Your content has been created.")
                 : T("Your {0} has been created.", contentItem.TypeDefinition.DisplayName));
-            if (!string.IsNullOrEmpty(returnUrl))
-            {
+            if (!string.IsNullOrEmpty(returnUrl)) {
                 return this.RedirectLocal(returnUrl);
             }
             var adminRouteValues = _contentManager.GetItemMetadata(contentItem).DisplayRouteValues;
             return RedirectToRoute(adminRouteValues);
         }
 
-        public ActionResult Edit(int id)
-        {
+        public ActionResult Edit(int id) {
             var contentItem = _contentManager.Get(id, VersionOptions.Latest);
 
             if (contentItem == null)
@@ -306,10 +275,8 @@ namespace Infusion.Documents.Controllers
 
         [HttpPost, ActionName("Edit")]
         [FormValueRequired("submit.Save")]
-        public ActionResult EditPOST(int id, string returnUrl)
-        {
-            return EditPOST(id, returnUrl, contentItem =>
-            {
+        public ActionResult EditPOST(int id, string returnUrl) {
+            return EditPOST(id, returnUrl, contentItem => {
                 if (!contentItem.Has<IPublishingControlAspect>() && !contentItem.TypeDefinition.Settings.GetModel<ContentTypeSettings>().Draftable)
                     _contentManager.Publish(contentItem);
             });
@@ -317,8 +284,7 @@ namespace Infusion.Documents.Controllers
 
         [HttpPost, ActionName("Edit")]
         [FormValueRequired("submit.Publish")]
-        public ActionResult EditAndPublishPOST(int id, string returnUrl)
-        {
+        public ActionResult EditAndPublishPOST(int id, string returnUrl) {
             var content = _contentManager.Get(id, VersionOptions.Latest);
 
             if (content == null)
@@ -330,8 +296,7 @@ namespace Infusion.Documents.Controllers
             return EditPOST(id, returnUrl, contentItem => _contentManager.Publish(contentItem));
         }
 
-        private ActionResult EditPOST(int id, string returnUrl, Action<ContentItem> conditionallyPublish)
-        {
+        private ActionResult EditPOST(int id, string returnUrl, Action<ContentItem> conditionallyPublish) {
             var contentItem = _contentManager.Get(id, VersionOptions.DraftRequired);
 
             if (contentItem == null)
@@ -346,14 +311,12 @@ namespace Infusion.Documents.Controllers
                 && Request.IsLocalUrl(returnUrl)
                 // only if the original returnUrl is the content itself
                 && String.Equals(returnUrl, Url.ItemDisplayUrl(contentItem), StringComparison.OrdinalIgnoreCase)
-                )
-            {
+                ) {
                 previousRoute = contentItem.As<IAliasAspect>().Path;
             }
 
             dynamic model = _contentManager.UpdateEditor(contentItem, this);
-            if (!ModelState.IsValid)
-            {
+            if (!ModelState.IsValid) {
                 _transactionManager.Cancel();
                 // Casting to avoid invalid (under medium trust) reflection over the protected View method and force a static invocation.
                 return View("Edit", (object)model);
@@ -363,8 +326,7 @@ namespace Infusion.Documents.Controllers
 
             if (!string.IsNullOrWhiteSpace(returnUrl)
                 && previousRoute != null
-                && !String.Equals(contentItem.As<IAliasAspect>().Path, previousRoute, StringComparison.OrdinalIgnoreCase))
-            {
+                && !String.Equals(contentItem.As<IAliasAspect>().Path, previousRoute, StringComparison.OrdinalIgnoreCase)) {
                 returnUrl = Url.ItemDisplayUrl(contentItem);
             }
 
@@ -376,15 +338,13 @@ namespace Infusion.Documents.Controllers
         }
 
         [HttpPost]
-        public ActionResult Remove(int id, string returnUrl)
-        {
+        public ActionResult Remove(int id, string returnUrl) {
             var contentItem = _contentManager.Get(id, VersionOptions.Latest);
 
             if (!Services.Authorizer.Authorize(Orchard.Core.Contents.Permissions.DeleteContent, contentItem, T("Couldn't remove content")))
                 return new HttpUnauthorizedResult();
 
-            if (contentItem != null)
-            {
+            if (contentItem != null) {
                 _contentManager.Remove(contentItem);
                 Services.Notifier.Information(string.IsNullOrWhiteSpace(contentItem.TypeDefinition.DisplayName)
                     ? T("That content has been removed.")
@@ -395,8 +355,7 @@ namespace Infusion.Documents.Controllers
         }
 
         [HttpPost]
-        public ActionResult Publish(int id, string returnUrl)
-        {
+        public ActionResult Publish(int id, string returnUrl) {
             var contentItem = _contentManager.GetLatest(id);
             if (contentItem == null)
                 return HttpNotFound();
@@ -412,8 +371,7 @@ namespace Infusion.Documents.Controllers
         }
 
         [HttpPost]
-        public ActionResult Unpublish(int id, string returnUrl)
-        {
+        public ActionResult Unpublish(int id, string returnUrl) {
             var contentItem = _contentManager.GetLatest(id);
             if (contentItem == null)
                 return HttpNotFound();
@@ -428,13 +386,11 @@ namespace Infusion.Documents.Controllers
             return this.RedirectLocal(returnUrl, () => RedirectToAction("List"));
         }
 
-        bool IUpdateModel.TryUpdateModel<TModel>(TModel model, string prefix, string[] includeProperties, string[] excludeProperties)
-        {
+        bool IUpdateModel.TryUpdateModel<TModel>(TModel model, string prefix, string[] includeProperties, string[] excludeProperties) {
             return TryUpdateModel(model, prefix, includeProperties, excludeProperties);
         }
 
-        void IUpdateModel.AddModelError(string key, LocalizedString errorMessage)
-        {
+        void IUpdateModel.AddModelError(string key, LocalizedString errorMessage) {
             ModelState.AddModelError(key, errorMessage.ToString());
         }
     }

@@ -1,6 +1,5 @@
 ﻿@using Orchard.ContentManagement
 @model Infusion.Documents.ViewModels.SearchViewModel
-<div class="search-return-wrap">
 <div class="left-float search-return-font">
 <div class="left-float search-return-box bg-elevator-pitch">
 <h3>Elevator Pitch</h3>
@@ -9,7 +8,7 @@
             @Display(Model.ElevatorPitches.First())
         }
         else {
-            @T("No elevator pitches found for the search term.")
+            @T("No elevator pitches")
         }
     </div>
 </div>
@@ -20,7 +19,7 @@
         @Display(Model.PainPoints.First())
     }
     else {
-        @T("No pain points found for the search term.")
+        @T("No pain points")
     }
 </div>
 </div>
@@ -32,7 +31,7 @@
         @Display(Model.Faq.First())
     }
     else {
-        @T("No FAQ found for the search term.")
+        @T("No FAQ")
     }
 </div>
 </div>
@@ -43,87 +42,56 @@
         @Display(Model.Benefits.First())
     }
     else {
-        @T("No benefits found for the search term.")
+        @T("No benefits")
     }
 </div>
 </div>
 </div>
 <div class="right-float width-240">
-    <div class="article-list-area">
-        <div class="article-title"><a>Relevant Resources</a></div>
-        <div class="article-box">
-            <div class="article-head-area"><span class="article-header-title"><a>Presentations</a></span></div>
-            @if (Model.Presentations.Any()) {
-                foreach (var documentContent in Model.Presentations) {
-                    var content = (IContent) documentContent.ContentItem;
-                    <div class="article-item-area"><a class="article-linkage" href="@Url.Content(Url.ItemDisplayUrl(content))">@Html.ItemDisplayText(content)</a></div>
-                }       
-            }
-            else { @T("No presentations found for the search term.") }
-        </div>
-        <div class="article-box">
-            <div class="article-head-area"><span class="article-header-title"><a>White Papers</a></span></div>
-            @if (Model.WhitePapers.Any()) {
-                foreach (var documentContent in Model.WhitePapers) {
-                    var content = (IContent)documentContent.ContentItem;
-                    <div class="article-item-area"><a class="article-linkage" href="@Url.Content(Url.ItemDisplayUrl(content))">@Html.ItemDisplayText(content)</a></div>
-                }       
-            }
-            else { @T("No presentations found for the search term.") }
-        </div>
-        <div class="article-box">
-            <div class="article-head-area"><span class="article-header-title"><a>Case Studies</a></span></div>
-            @if (Model.CaseStudies.Any()) {
-                foreach (var documentContent in Model.CaseStudies) {
-                    var content = (IContent) documentContent.ContentItem;
-                    <div class="article-item-area"><a class="article-linkage" href="@Url.Content(Url.ItemDisplayUrl(content))">@Html.ItemDisplayText(content)</a></div>
-                }       
-            }
-            else { @T("No case studies found for the search term.") }
-        </div>
-    </div>
-    <div class="rss-list-area">
-        <div class="rss-title"><a>Trending Now</a></div>
-        <div class="rss-item-area">
-            @if (Model.CaseStudies.Any()) {
-                foreach (var documentContent in Model.CaseStudies) {
-                    var content = (IContent) documentContent.ContentItem;
-                    <p class="rss-linkage"><a class="rss-linkage" href="@Url.Content(Url.ItemDisplayUrl(content))">NEWS:<span class="dark-font">@Html.ItemDisplayText(content)</span></a></p>
-                }
-            }
-            else {
-                <p class="rss-linkage"><span class="dark-font">
-                @T("No rss feeds found for the search term.")
-                    </span></p>
-            }
-        </div>
-        <div class="rss-item-area">
-            @if (Model.CaseStudies.Any()) {
-                foreach (var documentContent in Model.CaseStudies) {
-                    var content = (IContent) documentContent.ContentItem;
-                    <p class="rss-linkage"><a class="rss-linkage" href="@Url.Content(Url.ItemDisplayUrl(content))">NEWS:<span class="dark-font">@Html.ItemDisplayText(content)</span></a></p>
-                }
-            }
-            else {
-                <p class="rss-linkage"><span class="dark-font">
-                @T("No rss feeds found for the search term.")
-                    </span></p>
-            }
-        </div>
-                <div class="rss-item-area">
-            @if (Model.CaseStudies.Any()) {
-                foreach (var documentContent in Model.CaseStudies) {
-                    var content = (IContent) documentContent.ContentItem;
-                    <p class="rss-linkage"><a class="rss-linkage" href="@Url.Content(Url.ItemDisplayUrl(content))">NEWS:<span class="dark-font">@Html.ItemDisplayText(content)</span></a></p>
-                }
-            }
-            else {
-                <p class="rss-linkage"><span class="dark-font">
-                @T("No rss feeds found for the search term.")
-                    </span></p>
-            }
-        </div>
+<div class="article-list-area">
+<div class="article-title"><a>Relevant Resources</a></div>
+<div class="article-box">
+    <div class="article-head-area"><span class="article-header-title"><a>Presentations</a></span></div>
+    @if (Model.Presentations.Any()) {
+        foreach (var documentContent in Model.Presentations) {
+            var content = (IContent) documentContent.ContentItem;
+            <div class="article-item-area"><a class="article-linkage" href="@Url.Content(Url.ItemDisplayUrl(content))">@Html.ItemDisplayText(content)</a></div>
+        }       
+    }
+    else { @T("No presentations") }
+</div>
+<div class="article-box">
+<div class="article-head-area"><span class="article-header-title"><a>White Papers</a></span></div>
+    @if (Model.WhitePapers.Any()) {
+        foreach (var documentContent in Model.WhitePapers) {
+            var content = (IContent)documentContent.ContentItem;
+            <div class="article-item-area"><a class="article-linkage" href="@Url.Content(Url.ItemDisplayUrl(content))">@Html.ItemDisplayText(content)</a></div>
+        }       
+    }
+    else { @T("No presentations") }
+</div>
+<div class="article-box">
+<div class="article-head-area"><span class="article-header-title"><a>Case Studies</a></span></div>
+    @if (Model.CaseStudies.Any()) {
+        foreach (var documentContent in Model.CaseStudies) {
+            var content = (IContent) documentContent.ContentItem;
+            <div class="article-item-area"><a class="article-linkage" href="@Url.Content(Url.ItemDisplayUrl(content))">@Html.ItemDisplayText(content)</a></div>
+        }       
+    }
+    else { @T("No case studies") }
+</div>
+</div>
+<div class="rss-list-area">
+<div class="rss-title"><a>Trending Now</a></div>
+<div class="rss-item-area">
+<p class="rss-linkage"><a class="rss-linkage">NEWS:<span class="dark-font"> Announces new smart cloud technology to change the world and make magic super duper special kind of stuff.</span></a></p>
+</div>
+<div class="rss-item-area">
+<p class="rss-linkage"><a class="rss-linkage">NEWS:<span class="dark-font"> Announces new smart cloud technology to change the world and make magic super duper special kind of stuff.</span></a></p>
+</div>
+<div class="rss-item-area">
+<p class="rss-linkage"><a class="rss-linkage">NEWS:<span class="dark-font"> Announces new smart cloud technology to change the world and make magic super duper special kind of stuff.</span></a></p>
+</div>
 
-    </div>
 </div>
 </div>

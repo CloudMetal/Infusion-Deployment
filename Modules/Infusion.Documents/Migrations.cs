@@ -63,15 +63,5 @@ namespace Infusion.Documents {
 
             return 1;
         }
-
-        public int UpdateFrom1() {
-            SchemaBuilder.AlterTable("DocumentContentPartRecord", table => table
-                   .AddColumn<int>("OrderIndex"));
-
-            SchemaBuilder.AlterTable("DocumentContentPartRecord", table => table
-                   .DropColumn("SourceDocumentId"));
-
-            return 2;
-        }
     }
 }

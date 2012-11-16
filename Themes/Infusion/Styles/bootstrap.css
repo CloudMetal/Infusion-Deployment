@@ -3,8 +3,6 @@
  *
  */
 
-.zone-content { margin-bottom: 10px;padding-bottom: 10px;}
-
 @font-face {
     font-family: 'TradeGothicCondNo18';
     src: url('TradeGothicCondNo18Obl.ttf') format('truetype');
@@ -227,7 +225,7 @@ a:hover {
   width: 60px;
 }
 .offset12 {
-  margin-left: 940px;
+  margin-left: 980px;
 }
 .offset11 {
   margin-left: 900px;
@@ -1200,6 +1198,14 @@ legend + .control-group {
   color: #fff;
   font-size:22px;
 }
+.form-horizontal .control-label-modal {
+  float: left;
+  width: 190px;
+  padding-top: 5px;
+  text-align: right;
+  color: #595a5c;
+  font-size:20px;
+}
 .form-horizontal .controls {
   margin-left: 200px;
   /* Super jank IE7 fix to ensure the inputs in .input-append and input-prepend don't inherit the margin of the parent, in this case .controls */
@@ -2129,17 +2135,16 @@ table .span24 {
   color: rgba(255, 255, 255, 0.75);
 }
 .btn-primary {
-  background-color: #0074cc;
-  background-image: -moz-linear-gradient(top, #0088cc, #0055cc);
-  background-image: -ms-linear-gradient(top, #0088cc, #0055cc);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#0088cc), to(#0055cc));
-  background-image: -webkit-linear-gradient(top, #0088cc, #0055cc);
-  background-image: -o-linear-gradient(top, #0088cc, #0055cc);
-  background-image: linear-gradient(top, #0088cc, #0055cc);
+  background-color: #28bdb3;
+  background-image: -moz-linear-gradient(top, #34E3D7, #28bdb3);
+  background-image: -ms-linear-gradient(top, #34E3D7, #28bdb3);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#34E3D7), to(#28bdb3));
+  background-image: -webkit-linear-gradient(top, #34E3D7, #28bdb3);
+  background-image: -o-linear-gradient(top, #34E3D7, #28bdb3);
+  background-image: linear-gradient(top, #34E3D7, #28bdb3);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#0088cc', endColorstr='#0055cc', GradientType=0);
-  border-color: #0055cc #0055cc #003580;
-  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#34E3D7', endColorstr='#28bdb3', GradientType=0);
+  border-color: #28bdb3 #28bdb3 #34E3D7;
   filter: progid:dximagetransform.microsoft.gradient(enabled=false);
 }
 .btn-primary:hover,
@@ -2147,7 +2152,7 @@ table .span24 {
 .btn-primary.active,
 .btn-primary.disabled,
 .btn-primary[disabled] {
-  background-color: #0055cc;
+  background-color: #28bdb3;
 }
 .btn-primary:active,
 .btn-primary.active {
@@ -2390,9 +2395,9 @@ input[type="submit"].btn.btn-mini {
 .btn-group .dropdown-toggle {
   padding-left: 8px;
   padding-right: 8px;
-  -webkit-box-shadow: inset 1px 0 0 rgba(255, 255, 255, 0.125), inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
-  -moz-box-shadow: inset 1px 0 0 rgba(255, 255, 255, 0.125), inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
-  box-shadow: inset 1px 0 0 rgba(255, 255, 255, 0.125), inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+  /*-webkit-box-shadow: inset 1px 0 0 rgba(255, 255, 255, 0.125), inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);*/
+  /*-moz-box-shadow: inset 1px 0 0 rgba(255, 255, 255, 0.125), inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);*/
+  /*box-shadow: inset 1px 0 0 rgba(255, 255, 255, 0.125), inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);*/
   *padding-top: 3px;
   *padding-bottom: 3px;
 }
@@ -2422,9 +2427,9 @@ input[type="submit"].btn.btn-mini {
 }
 .btn-group.open .dropdown-toggle {
   background-image: none;
-  -webkit-box-shadow: inset 0 1px 6px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
-  -moz-box-shadow: inset 0 1px 6px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
-  box-shadow: inset 0 1px 6px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
+  /*-webkit-box-shadow: inset 0 1px 6px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);*/
+  /*-moz-box-shadow: inset 0 1px 6px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);*/
+  /*box-shadow: inset 0 1px 6px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);*/
 }
 .btn .caret {
   margin-top: 7px;
@@ -2811,10 +2816,10 @@ input[type="submit"].btn.btn-mini {
   *position: relative;
   *z-index: 2;
   overflow: visible;
-  margin-bottom: 13px;
+  margin-bottom: 18px;
 }
 .navbar-inner {
-    padding: 40px 20px 45px 20px;
+    padding: 35px 20px 30px 20px;
   background-color: #595a5c;
   border-top: 5px solid #28bdb3;
 }
@@ -3018,18 +3023,18 @@ input[type="submit"].btn.btn-mini {
   float: none;
   padding: 20px 10px 21px;
   line-height: 19px;
-  color: #ffffff;
+  color: #fff;
   text-decoration: none;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
 .navbar .nav > li > a:hover {
   background-color: transparent;
-  color: #999999;
+  color: #28bdb3;
   text-decoration: none;
 }
 .navbar .nav .active > a,
 .navbar .nav .active > a:hover {
-  color: #ffffff;
+  color: #28bdb3;
   text-decoration: none;
 }
 .navbar .divider-vertical {
@@ -3268,12 +3273,12 @@ input[type="submit"].btn.btn-mini {
   z-index: 2070;
 }
 .modal-backdrop {
-  position: fixed;
+  position: relative;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 1040;
+  z-index: 500;
   background-color: #000000;
 }
 .modal-backdrop.fade {
@@ -3288,7 +3293,7 @@ input[type="submit"].btn.btn-mini {
   position: fixed;
   top: 50%;
   left: 50%;
-  z-index: 1050;
+  z-index: 1000;
   overflow: auto;
   width: 560px;
   margin: -250px 0 0 -280px;
@@ -3301,9 +3306,9 @@ input[type="submit"].btn.btn-mini {
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
   border-radius: 6px;
-  -webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
-  -moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
-  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0 6px 10px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0 6px 10px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.5);
   -webkit-background-clip: padding-box;
   -moz-background-clip: padding-box;
   background-clip: padding-box;

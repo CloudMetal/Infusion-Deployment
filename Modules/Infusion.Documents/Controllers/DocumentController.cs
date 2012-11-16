@@ -6,7 +6,6 @@ using System.Web.Mvc;
 using Contrib.Taxonomies.Fields;
 using Infusion.Documents.Models;
 using Infusion.Documents.Services;
-using Infusion.Documents.ViewModels;
 using Orchard;
 using Orchard.Collections;
 using Orchard.ContentManagement;
@@ -18,10 +17,12 @@ using Orchard.Logging;
 using Orchard.Mvc;
 using Orchard.Search.Models;
 using Orchard.Search.Services;
+using Orchard.Search.ViewModels;
 using Orchard.Settings;
 using Orchard.Themes;
 using Orchard.UI.Navigation;
 using Orchard.UI.Notify;
+using SearchViewModel = Infusion.Documents.ViewModels.SearchViewModel;
 
 namespace Infusion.Documents.Controllers
 {
@@ -38,16 +39,14 @@ namespace Infusion.Documents.Controllers
             IOrchardServices orchardServices,
             ISiteService siteService,
             IDocumentContentService documentContentService,
-            ISearchService searchService,
-            IContentManager contentManager,
-            IShapeFactory shapeFactory) {
+            IShapeFactory shapeFactory, ISearchService searchService) {
             _documentService = documentService;
             _orchardServices = orchardServices;
             _siteService = siteService;
             _documentContentService = documentContentService;
-            _searchService = searchService;
-            _contentManager = contentManager;
             Shape = shapeFactory;
+            _searchService = searchService;
+            _contentManager = orchardServices.ContentManager;
             Logger = NullLogger.Instance;
             T = NullLocalizer.Instance;
         }
@@ -70,43 +69,41 @@ namespace Infusion.Documents.Controllers
             return View((object)viewModel);
         }
 
-        public ActionResult Item(int documentId)
+        public ActionResult Item(int documentId, PagerParameters pagerParameters)
         {
-            //Pager pager = new Pager(_siteService.GetSiteSettings(), pagerParameters);
+            Pager pager = new Pager(_siteService.GetSiteSettings(), pagerParameters);
 
             var documentPart = _documentService.Get(documentId, VersionOptions.Published).As<DocumentPart>();
             if (documentPart == null)
                 return HttpNotFound();
-            var contentQuery = _orchardServices.ContentManager.Query<DocumentContentPart, DocumentContentPartRecord>().List().OrderBy(c => c.OrderIndex)
-                                               .Where(c => c.DocumentPart.Id == documentId);
-            /*var documentContents = _documentContentService.Get(documentPart, pager.GetStartIndex(), pager.PageSize)
-                .Select(b => _orchardServices.ContentManager.BuildDisplay(b));*/
-            var documentContents = contentQuery.Select(b => _orchardServices.ContentManager.BuildDisplay(b));
+
+            var documentContents = _documentContentService.Get(documentPart, pager.GetStartIndex(), pager.PageSize)
+                .Select(b => _orchardServices.ContentManager.BuildDisplay(b));
             dynamic document = _orchardServices.ContentManager.BuildDisplay(documentPart);
 
             var list = Shape.List();
             list.AddRange(documentContents);
             document.Content.Add(Shape.Parts_Documents_DocumentContent_List(ContentItems: list), "5");
 
+            var totalItemCount = _documentContentService.ContentCount(documentPart);
+            document.Content.Add(Shape.Pager(pager).TotalItemCount(totalItemCount), "Content:after");
+
             return new ShapeResult(this, document);
         }
 
-        public ActionResult Find(PagerParameters pagerParameters, string q = "")
-        {
+        public ActionResult Find(PagerParameters pagerParameters, string q = "") {
             var pager = new Pager(_siteService.GetSiteSettings(), pagerParameters);
             var searchFields = _orchardServices.WorkContext.CurrentSite.As<SearchSettingsPart>().SearchedFields;
 
             IPageOfItems<ISearchHit> searchHits = new PageOfItems<ISearchHit>(new ISearchHit[] { });
-            try
-            {
+            try {
 
                 searchHits = _searchService.Query(q, pager.Page, pager.PageSize,
                                                   _orchardServices.WorkContext.CurrentSite.As<SearchSettingsPart>().Record.FilterCulture,
                                                   searchFields,
                                                   searchHit => searchHit);
             }
-            catch (Exception exception)
-            {
+            catch (Exception exception) {
                 Logger.Error(T("Invalid search query: {0}", exception.Message).Text);
                 _orchardServices.Notifier.Error(T("Invalid search query: {0}", exception.Message));
             }
@@ -117,16 +114,15 @@ namespace Infusion.Documents.Controllers
             // ignore search results which content item has been removed or unpublished
             var foundItems = _contentManager.GetMany<IContent>(foundIds, VersionOptions.Published, new QueryHints()).Where(x => x.ContentItem.ContentType == "DocumentContent").Select(x => x.As<DocumentContentPart>()).ToList();
 
-            foreach (var contentItem in foundItems)
-            {
+            foreach (var contentItem in foundItems) {
                 list.Add(_contentManager.BuildDisplay(contentItem, "Summary"));
             }
             searchHits.TotalItemCount -= foundIds.Count() - foundItems.Count();
 
+
             var pagerShape = Shape.Pager(pager).TotalItemCount(searchHits.TotalItemCount);
 
-            var searchViewModel = new SearchViewModel
-            {
+            var searchViewModel = new SearchViewModel {
                 Query = q,
                 TotalItemCount = searchHits.TotalItemCount,
                 StartPosition = (pager.Page - 1) * pager.PageSize + 1,
@@ -149,20 +145,16 @@ namespace Infusion.Documents.Controllers
                 searchViewModel.WhitePapers = BuildDocumentContentDisplay(documentContents, "WhitePaper"); ;
                 searchViewModel.CaseStudies = BuildDocumentContentDisplay(documentContents, "CaseStudy"); ;
                 searchViewModel.Presentations = BuildDocumentContentDisplay(documentContents, "Presentation"); ;
-                searchViewModel.CaseStudies = BuildDocumentContentDisplay(documentContents, "RSS"); ;
-                searchViewModel.Presentations = BuildDocumentContentDisplay(documentContents, "Comments"); ;
             }
 
             return View(searchViewModel);
         }
 
-        private static IEnumerable<DocumentContentPart> FilterDocumentContents(IEnumerable<DocumentContentPart> documentContents, string termName)
-        {
+        private static IEnumerable<DocumentContentPart> FilterDocumentContents(IEnumerable<DocumentContentPart> documentContents, string termName) {
 
-            foreach (var documentContent in documentContents)
-            {
+            foreach (var documentContent in documentContents) {
                 dynamic content = documentContent;
-                var documentTypeField = (TaxonomyField)((dynamic)content).DocumentType;
+                var documentTypeField = (TaxonomyField) ((dynamic) content).DocumentType;
 
                 if (documentTypeField.Terms.Value.Any(x => x.Name == termName))
                     yield return documentContent;
@@ -175,8 +167,7 @@ namespace Infusion.Documents.Controllers
             //       select documentContent;
         }
 
-        private IList<dynamic> BuildDocumentContentDisplay(IEnumerable<DocumentContentPart> documentContents, string termName)
-        {
+        private IList<dynamic> BuildDocumentContentDisplay(IEnumerable<DocumentContentPart> documentContents, string termName) {
             return FilterDocumentContents(documentContents, termName).Select(x => _contentManager.BuildDisplay(x, "Summary")).ToList();
         }
     }

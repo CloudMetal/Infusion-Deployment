@@ -6,14 +6,19 @@
     { 
         <meta name="viewport" content="width=device-width, initial-scale=1" /> 
     }
+    
     	Script.Include("http://code.jquery.com/jquery-latest.min.js").AtHead();
     	Script.Include("http://code.jquery.com/mobile/latest/jquery.mobile.min.js").AtHead();
     	Script.Include("jquery.mobile.init.js").AtHead();
-	Style.Include("http://code.jquery.com/mobile/latest/jquery.mobile.min.css");
-	Style.Include("fonts/jqm-icon-pack-2.1.2-fa.css");
-    	Style.Include("site.css");
-    	Style.Include("Infusion.css");
-
+	    Style.Include("http://code.jquery.com/mobile/latest/jquery.mobile.min.css");   
+        Style.Include("Infusion.css");
+        Style.Include("site.css");
+	    Style.Include("uniform.default.css");
+    	Style.Include("infusion-module.css");
+    	Style.Include("Themes/JQueryMobile/styles/font-awesome/jqm-icon-pack-2.1.2-fa.css");      
+    	Script.Include("content-row.js");		        
+        
+	    <script>(function (d) { d.className = "dyn" + d.className.substring(6, d.className.length); })(document.documentElement);</script> 
         
     /* Some useful shortcuts or settings
     ***************************************************************/
@@ -45,7 +50,9 @@
 
 	@Zone(Model.Header)
     <div id="nav-bar-top">	
-        SUNGARD(R)
+        <a href="/">SUNGARD(R)</a>
+
+
     @if (WorkContext.CurrentUser != null) {
         dynamic user = WorkContext.CurrentUser.ContentItem;
         List<string> roles = user.UserRolesPart.Roles;
@@ -60,17 +67,20 @@
         }
         </ul>
     } else {
-        @Html.ActionLink(T("Sign In").ToString(), "LogOn", new { Controller = "Account", Area = "Orchard.Users", ReturnUrl = (Request.QueryString["ReturnUrl"] ?? Request.RawUrl) })
+        @Html.ActionLink(T("Sign In").ToString(), "LogOn", new { Controller = "Account", Area = "Orchard.Users", ReturnUrl = (Request.QueryString["ReturnUrl"] ?? Request.RawUrl) }, new { @id = "nav-menu-btn" })
     }
     </div>
+
+
  @*   @if (Model.Navigation != null) {
         <div id="navigation" data-role="navbar">        
             @Zone(Model.Navigation)
         </div>
     } *@  
-    @using (Html.BeginForm("index", "search", new { area = "Orchard.Search" }, FormMethod.Get, new { @class = "navbar-search" })) {
+@using (Html.BeginForm("Find", "Document", new { area = "Infusion.Documents" }, FormMethod.Get, new { @class = "navbar-search" }))
+{
         <label>WHAT DO YOU NEED?</label>
-        <input type="search" name="search-mini" id="search-mini" data-mini="true" value="">
+        <input type="search" name="q" id="search-mini" data-mini="true" value="">
     }
 </header><!-- /header -->
 
@@ -102,15 +112,23 @@
 	@Display(New.User()) *@
     <div data-role="popup" id="comment-popup" data-position-to="window" class="ui-content">
         <form>
+            Add Comments:
             <textarea> </textarea>
-            <button type="submit">Comment</button>
+            Add Rating:
+            <div class="rating">
+<span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+</div>
+
+            <button type="submit">Submit Review</button>
         </form>
     </div>
     <a href="#comment-popup" data-rel="popup" data-role="button" data-theme="none" data-theme-overlay="none"><img src="@(ImgPath + "comment-icon.png")" alt="Comment"></a>
     <div data-role="popup" id="message-popup" data-position-to="window" class="ui-content">
         Message
     </div>
-    <a href="#message-popup" data-rel="popup" data-role="button" data-theme="none" data-theme-overlay="none"><img src="@(ImgPath + "message-icon.png")" alt="Message"></a>
+    <a href="mailto:"><img src="@(ImgPath + "message-icon.png")" alt="Message"></a>
+    <!--<a href="/"><img id="its-on-msg-mob" src="@(ImgPath + "ItsOnMessageMobile.png")" alt="It's On"></a>-->
+
     <img id="its-on-msg-mob" src="@(ImgPath + "ItsOnMessageMobile.png")" alt="It's On">
 </footer><!-- /footer -->
 @tag.EndElement    

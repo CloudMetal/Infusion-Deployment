@@ -108,12 +108,15 @@ input:focus.input-validation-error, textarea:focus.input-validation-error { bord
 
 #footer {
         background-color:#595a5c;
-        padding:10px;
+        line-height:50px;
         text-align:center;
         position: fixed;
         width: 940px;
         bottom: 0px;
+        height:55px;
 }
+
+.credits img { float:left; margin-left:10px; height:40px;padding-top:5px;}
 
 .copyright {
 	color:#fff;
@@ -131,28 +134,31 @@ input:focus.input-validation-error, textarea:focus.input-validation-error { bord
 }
 
 .home-content-search {
-    margin-top: 25%;
+    margin-top: 20%;
     background-color: #595a5c;
     width: 100%;
 }
 
-.nav-search-btn input[type="file"], .nav-search-btn input[type="submit"] {
-    padding: 8px 20px 8px 20px;
+.nav-search-btn input[type="submit"] {
+    padding: 6px 20px 6px 20px;
     margin-left: 25px;
     margin-top: 6px;
     font-size: 16px;
+  -webkit-border-radius: 7px;
+  -moz-border-radius: 7px;
+  border-radius: 7px;
 }
 
 .home-content-search-input {
     margin: 0 auto;
-    width: 560px;
+    width: 665px;
 }
 
 .search-query {
   padding-left: 14px;
   padding-right: 14px;
-  width: 410px;
-  height: 27px;
+  width: 515px;
+  height: 25px;
   margin:-5px 5px 0;
   -webkit-border-radius: 30px;
   -moz-border-radius: 30px;
@@ -175,3 +181,11 @@ a {
     color: #404041;
 	font-size:18px;
 }
+
+article.content-item { padding:10px; }
+
+.zone-content { padding-bottom: 85%; }
+
+.body-shadows {  }
+
+.top-search-header { position: relative; text-align: center; color: #fff; font-size: 20px; width: 535px; margin-top: -15px; padding-bottom: 5px; }

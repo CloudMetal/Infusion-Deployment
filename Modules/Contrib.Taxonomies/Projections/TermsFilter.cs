@@ -40,19 +40,37 @@ namespace Contrib.Taxonomies.Projections {
                     return;
                 }
 
+                int op = Convert.ToInt32(context.State.Operator);
+
                 var terms = ids.Select(_taxonomyService.GetTerm).ToList();
-
-                var predicates = new List<Action<IHqlExpressionFactory>>();
-
+                var allChildren = new List<TermPart>();
                 foreach(var term in terms) {
-                    var localTerm = term;
-                    Action<IHqlExpressionFactory> ors = x => x.Or(a => a.Eq("Id", ids.First()), b => b.Like("Path", localTerm.FullPath + "/", HqlMatchMode.Start));
-                    predicates.Add(ors);
+                    allChildren.AddRange(_taxonomyService.GetChildren(term));
+                    allChildren.Add(term);
                 }
-                
-                Action<IAliasFactory> selector = alias => alias.ContentPartRecord<TermsPartRecord>().Property("Terms", "terms").Property("TermRecord", "termRecord");
-                Action<IHqlExpressionFactory> filter = x => x.Conjunction(predicates.Take(1).Single(), predicates.Skip(1).ToArray());
-                context.Query.Where(selector, filter);
+
+                allChildren = allChildren.Distinct().ToList();
+
+                var allIds = allChildren.Select(x => x.Id).ToList();
+
+                switch(op) {
+                    case 0:
+                        // is one of
+                        Action<IAliasFactory> s = alias => alias.ContentPartRecord<TermsPartRecord>().Property("Terms", "terms").Property("TermRecord", "termRecord");
+                        Action<IHqlExpressionFactory> f = x => x.InG("Id", allIds);
+                        context.Query.Where(s, f);
+                        break;
+                    case 1:
+                        // is all of
+                        foreach (var id in allIds) {
+                            int termId = id;
+                            Action<IAliasFactory> selector =
+                                alias => alias.ContentPartRecord<TermsPartRecord>().Property("Terms", "terms" + termId);
+                            Action<IHqlExpressionFactory> filter = x => x.Eq("TermRecord.Id", termId);
+                            context.Query.Where(selector, filter);
+                        }
+                        break;
+                }
             }
         }
 
@@ -64,6 +82,15 @@ namespace Contrib.Taxonomies.Projections {
             }
 
             var tagNames = terms.Split(new[] { ',' }).Select(x => _taxonomyService.GetTerm(Int32.Parse(x)).Name);
+
+            int op = Convert.ToInt32(context.State.Operator);
+            switch (op) {
+                case 0:
+                    return T("Categorized with one of {0}", String.Join(", ", tagNames));
+
+                case 1:
+                    return T("Categorized with all of {0}", String.Join(", ", tagNames));
+            }
 
             return T("Categorized with {0}", String.Join(", ", tagNames));
         }

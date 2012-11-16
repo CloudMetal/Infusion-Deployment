@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 
-namespace Infusion.Documents.ViewModels
-{
-    public class SearchViewModel : Orchard.Search.ViewModels.SearchViewModel
-    {
-
+namespace Infusion.Documents.ViewModels {
+    public class SearchViewModel : Orchard.Search.ViewModels.SearchViewModel {
+        
         public IList<dynamic> ElevatorPitches { get; set; }
         public IList<dynamic> PainPoints { get; set; }
         public IList<dynamic> Faq { get; set; }
@@ -15,7 +10,16 @@ namespace Infusion.Documents.ViewModels
         public IList<dynamic> WhitePapers { get; set; }
         public IList<dynamic> CaseStudies { get; set; }
         public IList<dynamic> Presentations { get; set; }
-        public IList<dynamic> RSS { get; set; }
-        public IList<dynamic> Comments { get; set; }
+
+        public SearchViewModel()
+        {
+            ElevatorPitches = new List<dynamic>();
+            PainPoints = new List<dynamic>();
+            Faq = new List<dynamic>();
+            Benefits = new List<dynamic>();
+            WhitePapers = new List<dynamic>();
+            CaseStudies = new List<dynamic>();
+            Presentations = new List<dynamic>();
+        }
     }
 }

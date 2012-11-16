@@ -36,13 +36,28 @@ namespace Contrib.Taxonomies.Projections {
                             Description: T("Select some terms."),
                             Size: 10,
                             Multiple: true
+                            ),
+                        _Exclusion: Shape.FieldSet(
+                            _OperatorOneOf: Shape.Radio(
+                                Id: "operator-is-one-of", Name: "Operator",
+                                Title: T("Is one of"), Value: "0", Checked: true
+                                ),
+                            _OperatorIsAllOf: Shape.Radio(
+                                Id: "operator-is-all-of", Name: "Operator",
+                                Title: T("Is all of"), Value: "1"
+                                )
                             )
                         );
 
                     foreach (var taxonomy in _taxonomyService.GetTaxonomies()) {
-                        f._Terms.Add(new SelectListItem { Value = "", Text = taxonomy.Name });
+                        f._Terms.Add(new SelectListItem { Value = String.Empty, Text = taxonomy.Name });
                         foreach (var term in _taxonomyService.GetTerms(taxonomy.Id)) {
-                            var gap = new string(' ', term.GetLevels());
+                            var gap = new string('-', term.GetLevels());
+                            
+                            if(gap.Length > 0) {
+                                gap += " ";
+                            }
+
                             f._Terms.Add(new SelectListItem { Value = term.Id.ToString(), Text = gap + term.Name });
                         }
                     }
