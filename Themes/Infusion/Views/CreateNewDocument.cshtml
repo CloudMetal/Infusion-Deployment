@@ -1,0 +1,112 @@
+﻿@{
+    /* Get image path for images
+    ***************************************************************/
+    var ImgPath = Url.Content("~/Themes/Infusion/Content/Images/");
+}
+ <div class="infusion-admin">
+        <div class="infusion-admin-content">
+    <form class="form-horizontal">
+        <fieldset>
+
+            <div class="infusion-form-col1">
+                <div class="form-title">Step 1: Index File</div>
+                <hr />
+                <div class="control-group">
+                    <label class="control-label" for="input01">Document Short Title:</label>
+                    <div class="controls">
+                        <input type="text" class="input-xlarge" id="input01">
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="input01">Document Long Title:</label>
+                    <div class="controls">
+                        <input type="text" class="input-xlarge" id="Text12">
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="select01">Document Category:</label>
+                    <div class="controls">
+                        <select id="select2">
+                            <option>Benefits</option>
+                            <option>Case Study</option>
+                            <option>Elevator Pitch</option>
+                            <option>FAQs</option>
+                            <option>Pain Points</option>
+                            <option>Presentation</option>
+                            <option>White Paper</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="input01">Product Name:</label>
+                    <div class="controls">
+                        <input type="text" class="input-xlarge" id="Text1">
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="input01">Target Industry:</label>
+                    <div class="controls">
+                        <input type="text" class="input-xlarge" id="Text13">
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="input01">Target Audience:</label>
+                    <div class="controls">
+                        <input type="text" class="input-xlarge" id="Text14">
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="input01">Key Words:</label>
+                    <div class="controls">
+                        <textarea class="input-xlarge" id="textarea1" rows="3"></textarea>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="input01">Synonyms:</label>
+                    <div class="controls">
+                        <input type="text" class="input-xlarge" id="Text16">
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="textarea2">Document Description:</label>
+                    <div class="controls">
+                        <textarea class="input-xlarge" id="textarea2" rows="3"></textarea>
+                    </div>
+                </div>
+            </div>
+            <!-- close col1 -->
+            <div class="infusion-form-col2">
+                <div class="form-title">Step 2: Select Original File</div>
+                <hr />
+                <div class="control-group">
+                    <input id="file1" type="file">
+                </div>
+                <div class="form-title">Step 3: Select Thumbnail</div>
+                <hr />
+                <div class="control-group">
+                    <input class="input-file" id="file2" type="file">
+                </div>
+                <div class="form-title">Step 4: Select Broadcast Option</div>
+                <hr />
+                <span class="form-directions">Do you wish to notify all users<br />of this document?</span>
+                                      <div class="control-group">
+                                          <label class="radio inline whitetxtform" >Yes
+                                              <input type="radio" name="radio" />
+                                              </label>
+                                          <label class="radio inline whitetxtform" >No
+                                              <input type="radio" name="radio" />
+                                            </label>
+                                      </div>
+
+                <div class="form-title">Step 5: Complete Upload</div>
+                <hr />
+                <div class="control-group">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+
+            </div>
+            <!-- close col2 -->
+        </fieldset>
+    </form>
+        </div>
+        </div>

@@ -15,6 +15,7 @@ a {
     color: #404041;
 	font-size:18px;
 }
+
 article,
 aside,
 details,
@@ -107,6 +108,7 @@ input[type="file"], input[type="search"] {
   -moz-box-sizing: content-box;
   box-sizing: content-box;
 }
+button,
 input[type="file"]::-webkit-search-decoration,
 input[type="file"]::-webkit-search-cancel-button, 
 input[type="search"]::-webkit-search-decoration,
@@ -151,7 +153,6 @@ body {
     font-family: TradeGothicCondNo18;
   font-size: 13px;
   line-height: 18px;
-  color: #333333;
 }
 .content-wrap { padding-bottom: 20px;}
 a {
@@ -162,6 +163,7 @@ a:hover {
   color: #005580;
   text-decoration: underline;
 }
+
 .row {
   margin-left: -20px;
   *zoom: 1;
@@ -357,7 +359,6 @@ p small {
   font-weight: 200;
   line-height: 27px;
 }
-h1,
 h2,
 h3,
 h4,
@@ -379,8 +380,10 @@ h6 small {
   color: #999999;
 }
 h1 {
-  font-size: 30px;
-  line-height: 36px;
+color: white;
+font-size: 30px;
+margin-top: 20px;
+padding-top: 20px;
 }
 h1 small {
   font-size: 18px;
@@ -606,13 +609,13 @@ legend {
   margin-bottom: 27px;
   font-size: 19.5px;
   line-height: 36px;
-  color: #333333;
+  color: #fff;
   border: 0;
   border-bottom: 1px solid #eee;
 }
 legend small {
   font-size: 13.5px;
-  color: #999999;
+  color: #fff;
 }
 label,
 input,
@@ -632,8 +635,9 @@ textarea {
 label {
   display: block;
   margin-bottom: 5px;
-  color: #333333;
+  color: #fff;
 }
+select,
 input{
   display: inline-block;
   width: 210px;
@@ -649,7 +653,6 @@ input{
   border-radius: 30px;
 }
 textarea,
-select,
 .uneditable-input {
   display: inline-block;
   width: 210px;
@@ -727,8 +730,9 @@ input[type="file"] {
   line-height: 18px \9;
 }
 select {
-  width: 220px;
+  width: 280px;
   background-color: #ffffff;
+
 }
 select[multiple],
 select[size] {
@@ -747,12 +751,11 @@ input[type="hidden"] {
 }
 .radio,
 .checkbox {
-  padding-left: 5px;
 }
 .radio input[type="radio"],
 .checkbox input[type="checkbox"] {
-  float: left;
-  margin-left: -18px;
+  margin-left: 5px;
+  display: inline-block;
 }
 .controls > .radio:first-child,
 .controls > .checkbox:first-child {
@@ -763,13 +766,14 @@ input[type="hidden"] {
   display: inline-block;
   padding-top: 5px;
   margin-bottom: 0;
-  vertical-align: middle;
-  margin-left: -5px;
+  vertical-align: top;
+  height:18px;
+  float:left;
+  margin-right:20px;
 }
-.radio.inline.whitetxtform { font-size:22px; color:#fff; }
+.radio.inline.whitetxtform { float:left;font-size:22px; color:#fff;  }
 .radio.inline + .radio.inline,
 .checkbox.inline + .checkbox.inline {
-  margin-left: 10px;
 }
 input,
 textarea {
@@ -970,11 +974,10 @@ select:focus:required:invalid:focus {
   box-shadow: 0 0 6px #f8b9b7;
 }
 .form-actions {
-  padding: 17px 20px 18px;
+  padding: 17px 20px 18px 0px;
+  color:#fff;
   margin-top: 18px;
   margin-bottom: 18px;
-  background-color: #eeeeee;
-  border-top: 1px solid #ddd;
   *zoom: 1;
 }
 .form-actions:before,
@@ -2124,7 +2127,7 @@ table .span24 {
 .btn-inverse,
 .btn-inverse:hover {
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  color: #ffffff;
+  color: #555;
 }
 .btn-primary.active,
 .btn-warning.active,
@@ -2135,16 +2138,16 @@ table .span24 {
   color: rgba(255, 255, 255, 0.75);
 }
 .btn-primary {
-  background-color: #28bdb3;
-  background-image: -moz-linear-gradient(top, #34E3D7, #28bdb3);
-  background-image: -ms-linear-gradient(top, #34E3D7, #28bdb3);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#34E3D7), to(#28bdb3));
-  background-image: -webkit-linear-gradient(top, #34E3D7, #28bdb3);
-  background-image: -o-linear-gradient(top, #34E3D7, #28bdb3);
-  background-image: linear-gradient(top, #34E3D7, #28bdb3);
+  background-color: #f4f5f5;
+  background-image: -moz-linear-gradient(top, #f4f5f5, #dededf);
+  background-image: -ms-linear-gradient(top, #f4f5f5, #dededf);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#f4f5f5), to(#dededf));
+  background-image: -webkit-linear-gradient(top, #f4f5f5, #dededf);
+  background-image: -o-linear-gradient(top, #f4f5f5, #dededf);
+  background-image: linear-gradient(top, #f4f5f5, #dededf);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#34E3D7', endColorstr='#28bdb3', GradientType=0);
-  border-color: #28bdb3 #28bdb3 #34E3D7;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f4f5f5', endColorstr='#dededf', GradientType=0);
+  border-color: 1px solid #ccc;
   filter: progid:dximagetransform.microsoft.gradient(enabled=false);
 }
 .btn-primary:hover,
@@ -2152,11 +2155,11 @@ table .span24 {
 .btn-primary.active,
 .btn-primary.disabled,
 .btn-primary[disabled] {
-  background-color: #28bdb3;
+  background-color: #dededf;
 }
 .btn-primary:active,
 .btn-primary.active {
-  background-color: #004099 \9;
+  background-color: #dededf \9;
 }
 .btn-warning {
   background-color: #faa732;
@@ -2295,8 +2298,7 @@ input[type="submit"].btn::-moz-focus-inner {
 }
 button.btn.btn-large,
 input[type="submit"].btn.btn-large {
-  *padding-top: 7px;
-  *padding-bottom: 7px;
+    padding: 6px 20px 6px 20px;
 }
 button.btn.btn-small,
 input[type="submit"].btn.btn-small {
@@ -2871,7 +2873,7 @@ input[type="submit"].btn.btn-mini {
   height: auto;
 }
 .navbar {
-  color: #999999;
+  color: #595a5c;
 }
 .navbar .brand:hover {
   text-decoration: none;
@@ -3294,7 +3296,6 @@ input[type="submit"].btn.btn-mini {
   top: 50%;
   left: 50%;
   z-index: 1000;
-  overflow: auto;
   width: 560px;
   margin: -250px 0 0 -280px;
   background-color: #ffffff;

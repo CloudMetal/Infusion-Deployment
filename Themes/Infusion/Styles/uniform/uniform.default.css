@@ -291,6 +291,7 @@ div.radio.disabled.active span.checked {
 
 div.button {
   background-position: 0px -523px;
+  color: #595a5c;
 }
 
 div.button span {
@@ -319,7 +320,7 @@ div.button:active {
 div.button.active span,
 div.button:active span {
   background-position: right -703px;
-  color: #555;
+  color: #595a5c;
 }
 
 div.button.disabled,
@@ -330,7 +331,7 @@ div.button:disabled {
 div.button.disabled span,
 div.button:disabled span {
   background-position: right -733px;
-  color: #bbb;
+  color: #595a5c;
   cursor: default;
 }
 
@@ -423,6 +424,7 @@ Not advised to edit stuff below this line
 
 div.button {
   background-position: 0px -523px;
+  color: #595a5c;
 }
 
 div.button span {
@@ -451,7 +453,7 @@ div.button:active {
 div.button.active span,
 div.button:active span {
   background-position: right -703px;
-  color: #555;
+  color: #595a5c;
 }
 
 div.button.disabled,
@@ -462,7 +464,7 @@ div.button:disabled {
 div.button.disabled span,
 div.button:disabled span {
   background-position: right -733px;
-  color: #bbb;
+  color: #595a5c;
   cursor: default;
 }
 
@@ -572,9 +574,9 @@ div.uploader {
   height: 30px;
   margin-top:-3px;
       float:left;
-  line-height: 15px;
 }
 div.uploader span.filename {
+  line-height: 15px;
     float: right;
     font-size: 13px;
   background-color: white;
@@ -635,6 +637,7 @@ div.uploader input {
 
 div.uploader span.action {
   background-position: 0px -523px;
+  color: #595a5c;
 }
 
 div.uploader span.action {
@@ -663,7 +666,7 @@ div.uploader span.action:active {
 div.uploader span.action.active ,
 div.uploader span.action:active  {
   background-position: right -703px;
-  color: #555;
+  color: #595a5c;
 }
 
 div.uploader span.action.disabled,
@@ -674,7 +677,7 @@ div.uploader span.action:disabled {
 div.uploader span.action.disabled span,
 div.uploader span.action:disabled span {
   background-position: right -733px;
-  color: #bbb;
+  color: #595a5c;
   cursor: default;
 }
 
@@ -683,11 +686,14 @@ div.uploader span.action:disabled span {
 /* Button */
 div.uploader span.action  {
   height: 30px;
-  padding-top: 8px;
   font-size: 15px;
   letter-spacing: 1px;
   padding-left: 15px;
-  padding-right: 28px;
+  padding-right: 15px;
+  -webkit-border-radius: 9px; /* Saf3+, Chrome */
+border-radius: 9px; /* Opera 10.5, IE 9 */
+-moz-border-radius: 9px; /* for FF1+ */
+}
 }
 
 div.uploader span.action  {
@@ -698,7 +704,7 @@ div.uploader span.action  {
 div.uploader span.action  {
   display: -moz-inline-box;
   display: inline-block;
-  line-height: 1;
   text-align: center;
+  line-height:29px;
 float:left;
 }

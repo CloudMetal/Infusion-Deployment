@@ -5,7 +5,9 @@ Copyright: 2012
 */
 
 
-#layout-main {height: 100%;background-color: #595a5c; }
+#layout-main {background-color: #595a5c; }
+
+.find-content { background-color: #fff; padding: 20px 0 0; min-height:500px;}
 
 a.btn { vertical-align: middle; }
 
@@ -108,18 +110,19 @@ input:focus.input-validation-error, textarea:focus.input-validation-error { bord
 
 #footer {
         background-color:#595a5c;
-        line-height:50px;
-        text-align:center;
+        text-align:right;
         position: fixed;
         width: 940px;
         bottom: 0px;
         height:55px;
 }
 
-.credits img { float:left; margin-left:10px; height:40px;padding-top:5px;}
+.credits img { float:left; margin-left:10px; height:40px;padding-top:5px;        line-height:50px;}
 
 .copyright {
 	color:#fff;
+    margin-right:10px;
+        line-height:50px;
 }
 
 .header-powered {
@@ -147,6 +150,27 @@ input:focus.input-validation-error, textarea:focus.input-validation-error { bord
   -webkit-border-radius: 7px;
   -moz-border-radius: 7px;
   border-radius: 7px;
+  background-color: #f4f5f5;
+  background-image: -moz-linear-gradient(top, #f4f5f5, #dededf);
+  background-image: -ms-linear-gradient(top, #f4f5f5, #dededf);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#f4f5f5), to(#dededf));
+  background-image: -webkit-linear-gradient(top, #f4f5f5, #dededf);
+  background-image: -o-linear-gradient(top, #f4f5f5, #dededf);
+  background-image: linear-gradient(top, #f4f5f5, #dededf);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f4f5f5', endColorstr='#dededf', GradientType=0);
+  border-color: 1px solid #ccc;
+  filter: progid:dximagetransform.microsoft.gradient(enabled=false);
+}
+
+.nav-search-btn input[type="submit"]:hover,
+.nav-search-btn input[type="submit"]:active,
+.nav-search-btn input[type="submit"].disabled,
+.nav-search-btn input[type="submit"][disabled] {
+  background-color: #dededf;
+}
+.nav-search-btn input[type="submit"].active {
+  background-color: #dededf \9;
 }
 
 .home-content-search-input {
@@ -158,14 +182,12 @@ input:focus.input-validation-error, textarea:focus.input-validation-error { bord
   padding-left: 14px;
   padding-right: 14px;
   width: 515px;
-  height: 25px;
-  margin:-5px 5px 0;
+  height: 22px;
+  margin: 0px 5px 0;
   -webkit-border-radius: 30px;
   -moz-border-radius: 30px;
   border-radius: 30px;
 }
-
-
 
 @font-face {
     font-family: 'TradeGothicCondNo18';
@@ -183,8 +205,6 @@ a {
 }
 
 article.content-item { padding:10px; }
-
-.zone-content { padding-bottom: 85%; }
 
 .body-shadows {  }
 

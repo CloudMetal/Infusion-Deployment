@@ -12,9 +12,9 @@
     ***************************************************************/
 
     SetMeta("X-UA-Compatible", "IE=edge,chrome=1");
-Script.Require("jQuery");
+    Script.Require("jQuery");
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type="text/javascript" charset="utf-8"></script>
-    
+    Script.Include("jquery.uniform.js"); 
     <script type="text/javascript" charset="utf-8">
         $(function () {
             $("input, textarea, select, button").uniform();
@@ -22,6 +22,7 @@ Script.Require("jQuery");
     </script>
         
 
+    Style.Include("uniform/uniform.default.css");
     Style.Include("infusion-module.css");    
     Style.Include("bootstrap.css");
 
@@ -30,6 +31,7 @@ Script.Require("jQuery");
 
     var currentUrl = Request.Url.AbsoluteUri;
     var isOrigin = HttpContext.Current.Request.Url.AbsolutePath.EndsWith("/");
+    var isCreateDocument = HttpContext.Current.Request.Url.AbsolutePath.EndsWith("/create-new-document");    
     
     
     if(isOrigin){
@@ -118,7 +120,7 @@ Script.Require("jQuery");
         
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">@WorkContext.CurrentUser.UserName<b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                    @Display(Model.Navigation) <li>@Html.ActionLink(T("Change Password").ToString(), "ChangePassword", new { Controller = "Account", Area = "Orchard.Users" })</li>
+                    @Display(Model.Navigation) <li><a href="@Url.Content("~/create-new-document")">Add Document</a></li><li>@Html.ActionLink(T("Change Password").ToString(), "ChangePassword", new { Controller = "Account", Area = "Orchard.Users" })</li>
                     <li>@Html.ActionLink(T("Sign Out").ToString(), "LogOff", new { Controller = "Account", Area = "Orchard.Users", ReturnUrl = Context.Request.RawUrl })</li>
                     @if (AuthorizedFor(Orchard.Security.StandardPermissions.AccessAdminPanel))
                     {
@@ -141,7 +143,10 @@ Script.Require("jQuery");
         </div>
     }
 
-
+    @if (isCreateDocument)
+    {
+          @Display.CreateNewDocument()
+    }
     @if (isOrigin)
     {
         <div class="home-content-search">
