@@ -209,3 +209,27 @@ article.content-item { padding:10px; }
 .body-shadows {  }
 
 .top-search-header { position: relative; text-align: center; color: #fff; font-size: 20px; width: 535px; margin-top: -15px; padding-bottom: 5px; }
+
+.form-horizontal .control-label-modal
+{
+    width: initial;
+}
+
+.form-horizontal .controls
+{
+    margin-left: initial;
+}
+
+.input-xlarge
+{
+    width: 360px;
+}
+
+.zone-content
+{
+    background-color: white;
+    padding: 20px 0 0;
+    min-height: 500px;
+    overflow: hidden;
+    padding-bottom: 20px;
+}

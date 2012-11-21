@@ -80,8 +80,12 @@
     <Content Include="Content\Images\apple-touch-icon.png" />
     <Content Include="Content\Images\bg-input-focus.png" />
     <Content Include="Content\Images\bg-input.png" />
+    <Content Include="Content\Images\comment-icon.png" />
     <Content Include="Content\Images\glyphicons-halflings-white.png" />
     <Content Include="Content\Images\glyphicons-halflings.png" />
+    <Content Include="Content\Images\ItsOnMessage.png" />
+    <Content Include="Content\Images\message-icon.png" />
+    <Content Include="Content\Images\OnMessage.jpg" />
     <Content Include="Content\Images\select-icon.png" />
     <Content Include="Content\Images\sprite.png" />
     <Content Include="Content\Images\sprite_global_v6.png" />
@@ -174,6 +178,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Contrib.Profile\Profile.Tail.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\CreateNewDocument.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
